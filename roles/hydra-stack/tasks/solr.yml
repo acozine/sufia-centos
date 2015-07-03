@@ -1,11 +1,11 @@
 ---
 - name: create velocity log
   sudo: yes
-  file: path=/var/log/tomcat7/velocity.log state=touch owner=tomcat7 group=tomcat7 mode=0644
+  file: path=/var/log/tomcat/velocity.log state=touch owner=tomcat group=tomcat mode=0644
 
 - name: symlink velocity log
   sudo: yes
-  file: src=/var/log/tomcat7/velocity.log dest=/var/lib/tomcat7/velocity.log state=link
+  file: src=/var/log/tomcat/velocity.log dest=/var/lib/tomcat/velocity.log state=link
 
 - name: download solr tarball
   become: yes
@@ -21,7 +21,7 @@
   register: solr_dir
 
 - name: make solr lib dir
-  file: owner=tomcat7 group=tomcat7 state=directory path=/opt/solr/lib
+  file: owner=tomcat group=tomcat state=directory path=/opt/solr/lib
   sudo: yes
   when: solr_dir.stat.exists == False
 
@@ -43,27 +43,27 @@
 
 - name: copy logging jars
   sudo: yes
-  shell: cp {{ install_path }}/solr-4.10.3/example/lib/ext/*.jar /usr/share/tomcat7/lib/
+  shell: cp {{ install_path }}/solr-4.10.3/example/lib/ext/*.jar /usr/share/tomcat/lib/
 
 - name: set ownership and group for solr
   sudo: yes
-  shell: chown -R tomcat7:tomcat7 /opt/solr
+  shell: chown -R tomcat:tomcat /opt/solr
 
 - name: copy log4j properties file
   sudo: yes
-  shell: cp {{ install_path }}/solr-4.10.3/example/resources/log4j.properties /usr/share/tomcat7/
+  shell: cp {{ install_path }}/solr-4.10.3/example/resources/log4j.properties /usr/share/java/tomcat/
 
 - name: set ownership and group for tomcat
   sudo: yes
-  shell: chown -R tomcat7:tomcat7 /usr/share/tomcat7
+  shell: chown -R tomcat:tomcat /usr/share/tomcat
 
 - name: create solr xml file
   sudo: yes
-  template: src=hydra_xml.j2 dest=/opt/solr/{{ solr_context }}.xml group=tomcat7 owner=tomcat7
+  template: src=hydra_xml.j2 dest=/opt/solr/{{ solr_context }}.xml group=tomcat owner=tomcat
 
 - name: symlink solr xml file to tomcat
   sudo: yes
-  file: src=/opt/solr/{{ solr_context }}.xml dest=/etc/tomcat7/Catalina/localhost/{{ solr_context }}.xml state=link
+  file: src=/opt/solr/{{ solr_context }}.xml dest=/etc/tomcat/Catalina/localhost/{{ solr_context }}.xml state=link
 
 - name: symlink schema from code to solr
   sudo: yes
