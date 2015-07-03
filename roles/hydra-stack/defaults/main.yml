@@ -1,0 +1,8 @@
+---
+install_path: /opt/install
+install_user: install
+install_group: install
+become_user: install
+solr_context: hydra
+# obsolete?
+# project_name: sufia

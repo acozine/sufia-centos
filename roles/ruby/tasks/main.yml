@@ -1,0 +1,42 @@
+---
+#- name: check ruby {{ ruby_version }} installed
+#  shell: "ruby -v | grep {{ ruby_version }}"
+#  register: ruby_installed
+#  changed_when: false
+#  ignore_errors: yes # failure means our ruby version isn't installed yet
+#  always_run: yes
+
+- name: remove package ruby
+  sudo: yes
+  apt: name=ruby state=absent
+
+- name: download ruby
+  become: yes
+  get_url: url=http://cache.ruby-lang.org/pub/ruby/2.2/ruby-2.2.2.tar.gz owner={{ install_user }} group={{ install_group }} dest={{ install_path }}/ruby-2.2.2.tar.gz
+  
+- name: unzip ruby file
+  become: yes
+  unarchive: src=/opt/install/ruby-2.2.2.tar.gz dest={{ install_path }}/ creates={{ install_path }}/ruby-2.2.2/compile.c copy=no
+
+- name: check if ruby is installed
+  sudo: yes
+  stat: path=/usr/local/bin/ruby
+  register: ruby
+
+- name: configure ruby
+  become: yes
+  shell: cd {{ install_path }}/ruby-2.2.2 && ./configure --enable-shared creates={{ install_path }}/ruby-2.2.2/Makefile
+  
+- name: make ruby
+  become: yes
+  shell: cd {{ install_path }}/ruby-2.2.2 && make 
+  when: ruby.stat.exists == False
+
+- name: install ruby
+  sudo: yes
+  shell: cd {{ install_path }}/ruby-2.2.2 && make install creates=/usr/local/bin/ruby
+  when: ruby.stat.exists == False
+ 
+- name: install bundler
+  sudo: yes
+  gem: name=bundler user_install=no state=present

@@ -1,0 +1,19 @@
+---
+- name: set postgres password
+  sudo: yes
+  sudo_user: postgres
+  postgresql_user: name=postgres password={{ pg_pass }}
+
+- name: configure md5 security
+  sudo: yes
+  copy: src=pg_hba.conf dest=/etc/postgresql/9.3/main/pg_hba.conf group=postgres owner=postgres backup=yes
+
+- name: restart postgres server
+  sudo: yes
+  service: name=postgresql enabled=yes state=restarted
+
+- name: create pg hydra database
+  postgresql_db: name={{ hydra_db }} state=present login_user=postgres login_password={{ pg_pass }}
+
+- name: add pg hydra user
+  postgresql_user: db={{ hydra_db }} name={{ hydra_pg_user }} password={{ hydra_pg_pass }} priv=ALL state=present login_user=postgres login_password={{ pg_pass }}
