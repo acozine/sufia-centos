@@ -1,7 +1,7 @@
 ---
 - name: install zip utility
   sudo: yes
-  apt: name=unzip state=present
+  yum: name=unzip state=present
 
 - name: download fits zip
   become: yes
