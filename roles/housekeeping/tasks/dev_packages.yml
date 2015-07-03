@@ -1,6 +1,6 @@
 ---
-- name: update yum cache
-  yum: update_cache=yes
+- name: update all yum packages
+  yum: name=* state=latest
 
 - name: install dev tools and libraries
   yum: name={{ item}} state=present
@@ -40,6 +40,6 @@
     - java-1.7.0-openjdk-devel
     - gdbm-devel
     - redis
-    -xfsprogs
-# this was in the ubuntu package list
-#    - libxvidcore-dev
+    - xfsprogs
+    # this was in the ubuntu package list
+    #    - libxvidcore-dev
