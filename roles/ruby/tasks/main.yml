@@ -8,7 +8,7 @@
 
 - name: remove package ruby
   sudo: yes
-  apt: name=ruby state=absent
+  yum: name=ruby state=absent
 
 - name: download ruby
   become: yes
