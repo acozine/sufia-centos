@@ -1,37 +1,45 @@
 ---
-- name: update apt cache
-  apt: update_cache=yes
-
-- name: upgrade apt packages
-  apt: upgrade=full
+- name: update yum cache
+  yum: update_cache=yes
 
 - name: install dev tools and libraries
-  apt: name={{ item}} state=latest
+  yum: name={{ item}} state=present
   with_items:
-    - build-essential
-    - git
-    - git-core
-    - curl
-    - openssl
-    - libreadline6
-    - libreadline6-dev
-    - zlib1g
-    - zlib1g-dev
-    - libssl-dev
-    - libyaml-dev
-    - libxml2-dev
-    - libxslt-dev
+    # Development Tools group - manual install would be:
+    # sudo yum -y groupinstall "Development Tools"
     - autoconf
-    - libc6-dev
-    - ncurses-dev
     - automake
-    - libtool
+    - binutils
     - bison
-    - subversion
-    - pkg-config
-    - libmagickwand-dev
-    - imagemagick
-    - libcurl4-openssl-dev
-    - libxvidcore-dev
-    - redis-server
-    - xfsprogs
+    - flex
+    - gcc
+    - gcc-c++
+    - gettext
+    - libtool
+    - make
+    - patch
+    - pkgconfig
+    - redhat-rpm-config
+    - rpm-build
+    - rpm-sign
+    # other packages
+    - screen
+    - wget
+    - curl-devel
+    - httpd-devel
+    - openssl-devel
+    - readline-devel
+    - sqlite-devel
+    - mysql-devel
+    - ImageMagick-devel
+    - nasm
+    - libxml2-devel
+    - libxslt-devel
+    - libyaml-devel
+    - libffi-devel
+    - java-1.7.0-openjdk-devel
+    - gdbm-devel
+    - redis
+    -xfsprogs
+# this was in the ubuntu package list
+#    - libxvidcore-dev
