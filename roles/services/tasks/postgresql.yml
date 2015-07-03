@@ -1,12 +1,14 @@
 ---
 # installs database, dev library, and python psql adapter
 - name: install postgresql packages
-  apt: name={{ item }} state=present
+  yum: name={{ item }} state=present
   sudo: yes
   with_items:
   - postgresql
-  - libpq-dev
-  - python-psycopg2
+  - postgresql-devel
+  - postgresql-server
+  - postgresql-contrib
+  - postgresql-libs
   notify:
   - set postgres password
   - configure md5 security
