@@ -1,8 +1,8 @@
-This Ansible project was created by Data Curation Experts for the Chemical Heritage Foundation. It builds a production-style Hydra head on an Ubuntu 14.04 Amazon EC2 instance. The encrypted files contain variables that apply only to CHF. 
+This Ansible project was created by Data Curation Experts based on work sponsored by the Chemical Heritage Foundation. It builds a production-style Hydra head on a CentOS 7 Amazon EC2 instance.
 
 Before you can use this project, you must [install Ansible](http://docs.ansible.com/intro_installation.html).
 
-To create an ec2 instance for an organization other than CHF:
+To create an ec2 instance:
 
 1. create new vars/main.yml files in the launch_ec2 and ec2 roles  
 2. add your organization's AWS credentials there
@@ -19,8 +19,9 @@ in `config/deploy.rb` and/or in `config/deploy/<yourenv>.rb`
 To use this project with [Vagrant](http://docs.vagrantup.com/v2/):
 
 1. create a Vagrant project  
-2. modify the Vagrantfile to use Ansible (see sample Vagrantfile for ideas)  
-3. be sure to point to the vagrant.yml file, which skips the launch_ec2 and ec2 roles
-4. clone this project as the `provisioning` sub-directory of your Vagrant project  
-5. run `vagrant up`
+2. modify the Vagrantfile to use a centos 7 box ( config.vm.box = )  
+3. modify the Vagrantfile to use Ansible (see sample Vagrantfile for ideas)  
+4. be sure to point to the vagrant.yml file, which skips the launch_ec2 and ec2 roles
+5. clone this project as the `provisioning` sub-directory of your Vagrant project  
+6. run `vagrant up`
 
