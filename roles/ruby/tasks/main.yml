@@ -39,11 +39,11 @@
 
 - name: symlink ruby for root
   sudo: yes
-  file: source=/usr/local/bin/ruby dest=/usr/bin/ruby state=link
+  file: src=/usr/local/bin/ruby dest=/usr/bin/ruby state=link
 
 - name: symlink gem for root 
   sudo: yes
-  file: source=/usr/local/bin/gem dest=/usr/bin/gem state=link
+  file: src=/usr/local/bin/gem dest=/usr/bin/gem state=link
 
 - name: install bundler
   sudo: yes
