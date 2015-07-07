@@ -14,12 +14,12 @@
 
 - name: copy over fedora.war
   sudo: yes
-  command: cp {{ install_path }}/fcrepo-webapp-4.1.0.war /var/lib/tomcat7/webapps/fedora.war
+  command: cp {{ install_path }}/fcrepo-webapp-4.1.0.war /var/lib/tomcat/webapps/fedora.war
   when: fedora_war.stat.exists == False
 
 - name: create tomcat config and java options
   sudo: yes
-  template: src=tomcat7.j2 dest=/etc/tomcat/tomcat.conf backup=yes 
+  template: src=tomcat.j2 dest=/etc/tomcat/tomcat.conf backup=yes 
 # TODO: make Java options configurable at the time of the ansible run
 
 - name: restart tomcat

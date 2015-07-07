@@ -8,4 +8,5 @@
       - tomcat-admin-webapps
 
 - name: set tomcat to restart on reboot
+  sudo: yes
   service: name=tomcat enabled=yes
