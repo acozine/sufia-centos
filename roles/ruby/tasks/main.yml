@@ -36,7 +36,15 @@
   sudo: yes
   shell: cd {{ install_path }}/ruby-2.2.2 && make install creates=/usr/local/bin/ruby
   when: ruby.stat.exists == False
- 
+
+- name: symlink ruby for root
+  sudo: yes
+  file: source=/usr/local/bin/ruby dest=/usr/bin/ruby state=link
+
+- name: symlink gem for root 
+  sudo: yes
+  file: source=/usr/local/bin/gem dest=/usr/bin/gem state=link
+
 - name: install bundler
   sudo: yes
   gem: name=bundler user_install=no state=present
