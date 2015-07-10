@@ -1,7 +1,7 @@
 ---
 - name: restart ssh service
   sudo: yes
-  command: service ssh restart
+  command: systemctl restart sshd
   # service module has a bug related to ssh
   # see http://stackoverflow.com/questions/30162528/ansible-service-restart-failed
   # will be fixed in ansible v 2.0
