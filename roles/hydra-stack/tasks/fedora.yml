@@ -1,7 +1,7 @@
 ---
 - name: download fedora
   become: yes
-  get_url: url=http://repo1.maven.org/maven2/org/fcrepo/fcrepo-webapp/4.1.0/fcrepo-webapp-4.1.0.war owner={{ install_user }} group={{ install_group }} dest={{ install_path }}/fcrepo-webapp-4.1.0.war
+  get_url: url=http://repo1.maven.org/maven2/org/fcrepo/fcrepo-webapp/4.1.1/fcrepo-webapp-4.1.1.war owner={{ install_user }} group={{ install_group }} dest={{ install_path }}/fcrepo-webapp-4.1.1.war
 
 - name: make fedora data dir
   file: owner=tomcat group=tomcat state=directory path=/opt/fedora-data
@@ -14,7 +14,7 @@
 
 - name: copy over fedora.war
   sudo: yes
-  command: cp {{ install_path }}/fcrepo-webapp-4.1.0.war /var/lib/tomcat/webapps/fedora.war
+  command: cp {{ install_path }}/fcrepo-webapp-4.1.1.war /var/lib/tomcat/webapps/fedora.war
   when: fedora_war.stat.exists == False
 
 - name: create tomcat config and java options
