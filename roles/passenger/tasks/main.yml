@@ -5,8 +5,15 @@
 - name: install passenger gem
   gem: name=passenger user_install=no state=present version={{ passenger_ver }}
 
-- name: symlink passenger utilities to root user
-  shell: sudo ln -s /usr/local/bin/passenger* /usr/sbin/
+- name: symlink passenger utilities for root user
+  file: src=/usr/local/bin/{{ item }} dest=/usr/sbin/{{ item }}
+  with_items:
+      - passenger
+      - passenger-config
+      - passenger-install-apache2-module
+      - passenger-install-nginx-module
+      - passenger-memory-stats
+      - passenger-status
 
 - name: install passenger-install-apache2-module
   sudo: yes
@@ -16,5 +23,5 @@
   shell: passenger-install-apache2-module --snippet > /etc/httpd/conf.d/passenger.conf creates=/etc/httpd/conf.d/passenger.conf
   
 - name: restart apache
-  service: name=apache2 state=restarted
+  service: name=httpd state=restarted
   
