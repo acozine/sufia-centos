@@ -1,4 +1,12 @@
 ---
+#- name: initialize postgres db
+#  sudo: yes
+#  command: postgresql-setup initdb
+
+- name: start postgres
+  sudo: yes
+  service: name=postgresql enabled=yes state=started
+  
 - name: set postgres password
   sudo: yes
   sudo_user: postgres
@@ -10,7 +18,7 @@
 
 - name: restart postgres server
   sudo: yes
-  service: name=postgresql enabled=yes state=restarted
+  service: name=postgresql state=restarted
 
 - name: create pg hydra database
   postgresql_db: name={{ hydra_db }} state=present login_user=postgres login_password={{ pg_pass }}

@@ -1,5 +1,13 @@
 ---
 # installs database, dev library, and python psql adapter
+- name: enable epel repo
+  sudo: yes
+  yum: name=http://dl.fedoraproject.org/pub/epel/7/x86_64/e//epel-release-7-5.noarch.rpm state=present
+  
+- name: install psycopg2
+  sudo: yes
+  yum: name=python-psycopg2 update_cache=yes state=present
+
 - name: install postgresql packages
   yum: name={{ item }} state=present
   sudo: yes
@@ -9,7 +17,10 @@
   - postgresql-server
   - postgresql-contrib
   - postgresql-libs
+  - postgresql-python
   notify:
+  #- initialize postgres db
+  - start postgres
   - set postgres password
   - configure md5 security
   - restart postgres server
