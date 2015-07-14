@@ -1,0 +1,12 @@
+---
+JETTY_VERSION: 8.1.16.v20140903
+marmotta_group: marmotta
+marmotta_user: marmotta
+marmotta_db: marmotta
+marmotta_pg_user: marmotta
+marmotta_pg_pass: abcmarmotta
+pg_pass: postgres
+install_path: /opt/install
+install_user: install
+install_group: install
+become_user: install

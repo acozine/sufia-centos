@@ -1,6 +1,0 @@
---
-jetty_version: 8.1.16.v20140903
-marmotta_db: marmotta
-marmotta_pg_user: marmotta
-marmotta_pg_pass: abcmarmotta
-pg_pass: postgres

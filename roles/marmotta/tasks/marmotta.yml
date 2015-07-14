@@ -1,17 +1,23 @@
 ---
 - name: create marmotta group
   group: name={{ marmotta_group }} state=present
+  sudo: yes
 
 - name: create marmotta user
   user: name={{ marmotta_user }} group={{ marmotta_group }} shell=/bin/bash home=/opt/marmotta createhome=yes state=present
+  sudo: yes
 
 - name: download jetty
   become: yes
-  get_url: url=http://download.eclipse.org/jetty/{{ JETTY_VERSION }}/dist/jetty-distribution-{{ JETTY_VERSION }}.tar.gz owner={{ install_user }} group={{ install_group }} dest={{ install_path }}/jetty-distribution-{{ JETTY_VERSION }}.tar.gz
+  get_url: url=http://archive.eclipse.org/jetty/{{ JETTY_VERSION }}/dist/jetty-distribution-{{ JETTY_VERSION }}.tar.gz owner={{ install_user }} group={{ install_group }} dest={{ install_path }}/jetty-distribution-{{ JETTY_VERSION }}.tar.gz
 
 - name: untar jetty
   become: yes
-  unarchive: src={{ install_path }}/jetty-distribution-{{ JETTY_VERSION }}.tar.gz dest=/opt/jetty8 creates=/opt/jetty8
+  unarchive: src={{ install_path }}/jetty-distribution-8.1.16.v20140903.tar.gz dest={{ install_path }}/ creates={{ install_path }}/jetty-distribution-8.1.16.v20140903/etc/jetty.xml copy=no
+
+- name: copy jetty contents to working directory
+  become: yes
+  shell: cp -R {{ install_path }}/jetty-distribution-8.1.16.v20140903 /opt/jetty8
 
 - name: download marmotta
   become: yes
@@ -19,21 +25,23 @@
 
 - name: unzip marmotta
   become: yes
-  unarchive: src={ install_path }/apache-marmotta-3.3.0-webapp.zip dest=/opt/jetty8/webapps/marmotta.war creates=/opt/jetty8/webapps/marmotta.war
+  unarchive: src={{ install_path }}/apache-marmotta-3.3.0-webapp.zip dest={{ install_path }}/ creates={{ install_path }}/marmotta.war copy=no
 
 - name: set default variables for jetty
   copy: src=jetty_default dest=/etc/default/jetty
   sudo: yes
 
 - name: copy marmotta config files
-  copy: src={ item } dest=/opt/jetty8/etc/{ item }
+  copy: src={{ item }} dest=/opt/jetty8/etc/{{ item }}
+  sudo: yes
   with_items:
     - jetty.xml
     - jetty-plus.xml
     - marmotta-override-web.xml
 
 - name: set marmotta system config properties
-  template: src=system-config.properties.j2 dest=/opt/marmotta/system-config/properties backup=yes
+  template: src=system-config.properties.j2 dest=/opt/marmotta/system-config.properties backup=yes
+  sudo: yes
 
 - name: create jetty init script
   file: src=/opt/jetty8/bin/jetty.sh dest=/etc/rc.d/jetty state=link
@@ -41,6 +49,7 @@
 
 - name: copy marmotta file for jetty
   copy: src=marmotta-config.xml dest=/opt/jetty8/contexts-available/marmotta.xml
+  sudo: yes
 
 - name: symlink marmotta file to jetty
   file: src=/opt/jetty8/contexts-available/marmotta.xml dest=/opt/jetty8/contexts/marmotta.xml state=link
@@ -48,10 +57,12 @@
 
 - name: set permissions for marmotta directory
   file: path=/opt/marmotta owner={{ marmotta_user }} group={{ marmotta_group }} mode=0755 state=directory recurse=yes
-  
+  sudo: yes
+
 - name: create logs directory
-  file: dest=/opt/marmotta/logs owner={{ marmotta_user }} group={{ marmotta_group }} mode=0755
+  file: dest=/opt/marmotta/logs owner={{ marmotta_user }} group={{ marmotta_group }} mode=0755 state=directory
+  sudo: yes
 
 - name: set permissions for jetty directory
   file: path=/opt/jetty8 owner={{ marmotta_user }} group={{ marmotta_group }} state=directory recurse=yes
-
+  sudo: yes
