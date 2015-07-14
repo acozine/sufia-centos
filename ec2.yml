@@ -16,5 +16,6 @@
     - { role: hydra-stack }
     - { role: services }
     - { role: passenger, sudo: yes }
+    - { role: marmotta }
     - { role: app-config, sudo: yes }
 #    - { role: ec2, sudo: yes }
