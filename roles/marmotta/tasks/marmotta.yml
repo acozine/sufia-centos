@@ -25,7 +25,11 @@
 
 - name: unzip marmotta
   become: yes
-  unarchive: src={{ install_path }}/apache-marmotta-3.3.0-webapp.zip dest={{ install_path }}/ creates={{ install_path }}/marmotta.war copy=no
+  unarchive: src={{ install_path }}/apache-marmotta-3.3.0-webapp.zip dest={{ install_path }}/ creates={{ install_path }}/apache-marmotta-3.3.0/marmotta.war copy=no
+
+- name: copy marmotta
+  command: cp {{ install_path }}/apache-marmotta-3.3.0/marmotta.war /opt/jetty8/webapps/marmotta.war
+  sudo: yes
 
 - name: set default variables for jetty
   copy: src=jetty_default dest=/etc/default/jetty
@@ -44,7 +48,7 @@
   sudo: yes
 
 - name: create jetty init script
-  file: src=/opt/jetty8/bin/jetty.sh dest=/etc/rc.d/jetty state=link
+  file: src=/opt/jetty8/bin/jetty.sh dest=/etc/rc.d/init.d/jetty state=link
   sudo: yes
 
 - name: copy marmotta file for jetty
@@ -65,4 +69,8 @@
 
 - name: set permissions for jetty directory
   file: path=/opt/jetty8 owner={{ marmotta_user }} group={{ marmotta_group }} state=directory recurse=yes
+  sudo: yes
+
+- name: start jetty and marmotta
+  service: name=jetty state=restarted
   sudo: yes
