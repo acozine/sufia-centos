@@ -1,0 +1,45 @@
+<?xml version="1.0"  encoding="ISO-8859-1"?>
+<!DOCTYPE Configure PUBLIC "-//Jetty//Configure//EN" "http://www.eclipse.org/jetty/configure.dtd">
+
+<Configure class="org.eclipse.jetty.webapp.WebAppContext">
+
+  <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!-- Context for running marmotta with jetty 8                       -->
+  <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <Set name="contextPath">/marmotta</Set>
+  <Set name="war"><SystemProperty name="jetty.home" default="."/>/webapps/marmotta.war</Set>
+
+  <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!-- Use the dpla override (see github.com/dpla/marmotta-jetty)      -->
+  <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <Set name="extractWAR">true</Set>
+  <Set name="copyWebDir">false</Set>
+  <Set name="defaultsDescriptor"><SystemProperty name="jetty.home" default="."/>/etc/webdefault.xml</Set>
+  <Set name="overrideDescriptor"><SystemProperty name="jetty.home" default="."/>/etc//marmotta-override-web.xml</Set>
+  <Set name="tempDirectory">/opt/marmotta</Set>  
+
+  <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!-- Store marmotta stuff in /opt/marmotta instead of /tmp/marmotta  -->
+  <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <Call name="setAttribute">
+    <Arg>org.eclipse.jetty.webapp.basetempdir</Arg>
+    <Arg>/opt</Arg>
+  </Call>
+ 
+  <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!-- Add marmotta logger                                             -->
+  <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+ <Set name="handler">
+    <New id="RequestLog" class="org.eclipse.jetty.server.handler.RequestLogHandler">
+      <Set name="requestLog">
+	<New id="RequestLogImpl" class="org.eclipse.jetty.server.NCSARequestLog">
+	  <Set name="filename"><Property name="jetty.logs" default="./logs"/>/marmotta-yyyy_mm_dd.log</Set>
+	  <Set name="filenameDateFormat">yyyy_MM_dd</Set>
+	  <Set name="append">true</Set>
+	  <Set name="LogTimeZone">GMT</Set>
+	</New>
+      </Set>
+    </New>
+  </Set>
+  
+</Configure>

@@ -1,3 +1,4 @@
 ---
+- include: pg_marmotta.yml
 - include: marmotta.yml
 - include: files.yml
