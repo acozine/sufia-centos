@@ -1,0 +1,11 @@
+---
+- name: add alex2 shared config files
+  copy: src={{ item }} dest=/opt/{{ project_name }}/shared/config/{{ item }} owner={{ capistrano_user }} group={{ capistrano_group }} backup=no
+  with_items:
+      - ezid.yml
+      - smtp.yml
+
+- name: add shared config/environments/production.rb
+  copy: src=production.rb dest=/opt/{{ project_name }}/shared/config/environments/production.rb owner={{ capistrano_user }} group={{ capistrano_group }} backup=no
+
+      
