@@ -40,6 +40,7 @@
     - java-1.7.0-openjdk-devel
     - gdbm-devel
     # - redis
+    - git
     - xfsprogs
     # this was in the ubuntu package list
     #    - libxvidcore-dev
