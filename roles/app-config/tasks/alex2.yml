@@ -5,7 +5,10 @@
       - ezid.yml
       - smtp.yml
 
+- name: add config/environments directory
+  file: path=/opt/{{ project_name }}/shared/config/environments owner={{ capistrano_user }} group={{ capistrano_group }} state=directory
+ 
 - name: add shared config/environments/production.rb
-  copy: src=production.rb dest=/opt/{{ project_name }}/shared/config/environments/production.rb owner={{ capistrano_user }} group={{ capistrano_group }} backup=no
+  template: src=production.rb.j2 dest=/opt/{{ project_name }}/shared/config/environments/production.rb owner={{ capistrano_user }} group={{ capistrano_group }} backup=no
 
       
