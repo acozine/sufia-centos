@@ -19,7 +19,7 @@
   - postgresql-libs
   - postgresql-python
   notify:
-  #- initialize postgres db
+  - initialize postgres db
   - start postgres
   - set postgres password
   - configure md5 security

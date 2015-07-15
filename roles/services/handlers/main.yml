@@ -1,7 +1,7 @@
 ---
-#- name: initialize postgres db
-#  sudo: yes
-#  command: postgresql-setup initdb
+- name: initialize postgres db
+  sudo: yes
+  command: postgresql-setup initdb
 
 - name: start postgres
   sudo: yes
