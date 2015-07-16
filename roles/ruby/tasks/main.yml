@@ -16,7 +16,7 @@
   
 - name: unzip ruby file
   become: yes
-  unarchive: src=/opt/install/ruby-2.2.2.tar.gz dest={{ install_path }}/ creates={{ install_path }}/ruby-2.2.2/compile.c copy=no
+  unarchive: src={{ install_path }}/ruby-2.2.2.tar.gz dest={{ install_path }}/ creates={{ install_path }}/ruby-2.2.2/compile.c copy=no
 
 - name: check if ruby is installed
   sudo: yes
