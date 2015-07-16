@@ -4,6 +4,7 @@
   with_items:
       - ezid.yml
       - smtp.yml
+      - fedora.yml
 
 - name: add config/environments directory
   file: path=/opt/{{ project_name }}/shared/config/environments owner={{ capistrano_user }} group={{ capistrano_group }} state=directory
