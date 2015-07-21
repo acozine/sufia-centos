@@ -19,6 +19,7 @@
   - postgresql-libs
   - postgresql-python
   notify:
+  - symlink runuser
   - initialize postgres db
   - start postgres
   - set postgres password
