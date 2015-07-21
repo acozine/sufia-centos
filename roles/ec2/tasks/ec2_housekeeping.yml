@@ -5,6 +5,9 @@
 - name: mount volume at /opt
   mount: name=/opt src=/dev/xvdf fstype=xfs state=mounted
 
+# TODO figure out how to install the backup tools on CentOS
+# the tasks below work on Ubuntu
+
 #- name: install PPA for ec2-consistent-snapshot
 #  apt_repository: repo='ppa:alestic'
   

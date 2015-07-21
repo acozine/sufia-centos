@@ -1,0 +1,15 @@
+---
+- name: temporarily move Guest Additions
+  sudo: yes
+  shell: mv "/opt/VBoxGuestAdditions"* /tmp
+
+- name: format volume for /opt
+  filesystem: fstype=xfs dev=/dev/sdc
+
+- name: mount volume at /opt
+  mount: name=/opt src=/dev/sdc fstype=xfs state=mounted
+
+- name: restore Guest Additions
+  sudo: yes
+  shell: mv "/tmp/VBoxGuestAdditions"* /opt
+

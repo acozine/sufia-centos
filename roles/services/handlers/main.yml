@@ -1,4 +1,8 @@
 ---
+- name: symlink runuser
+  sudo: yes
+  file: src=/usr/sbin/runuser dest=/usr/bin/runuser state=link
+
 - name: initialize postgres db
   sudo: yes
   command: postgresql-setup initdb
@@ -9,8 +13,7 @@
   
 - name: set postgres password
   sudo: yes
-  sudo_user: postgres
-  postgresql_user: name=postgres password={{ pg_pass }}
+  shell: cd /opt && sudo su - postgres -c "psql -U postgres -d postgres -c \"ALTER USER postgres WITH PASSWORD '{{ pg_pass }}';\""
 
 - name: configure md5 security
   sudo: yes
