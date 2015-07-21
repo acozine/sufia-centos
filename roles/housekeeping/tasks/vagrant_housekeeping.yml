@@ -1,0 +1,7 @@
+---
+- name: format volume for /opt
+  filesystem: fstype=ext4 dev=/dev/sdc
+
+- name: mount volume at /opt
+  mount: name=/opt src=/dev/sdc fstype=ext4 state=mounted
+

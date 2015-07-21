@@ -1,6 +1,7 @@
 ---
 - include: SELinux.yml
 - include: dev_packages.yml
-- include: ec2_housekeeping.yml
+#- include: ec2_housekeeping.yml
+- include: vagrant_housekeeping.yml
 - include: users_groups_dirs.yml
 
