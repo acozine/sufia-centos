@@ -2,8 +2,8 @@
   hosts: vagrant
   remote_user: vagrant
   roles:
-#    - { role: whole_hydra }
     - { role: housekeeping, sudo: yes }
+    - { role: vagrant }
     - { role: ruby }
     - { role: hydra-stack }
     - { role: services }

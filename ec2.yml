@@ -12,6 +12,7 @@
     ec2_vol_1: "{{ hostvars['localhost'].ec2_vol }}"
   roles:
     - { role: housekeeping, sudo: yes }
+    - { role: ec2 }
     - { role: ruby }
     - { role: hydra-stack }
     - { role: services }
