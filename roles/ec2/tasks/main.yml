@@ -1,3 +1,6 @@
 ---
   - include: ec2_housekeeping.yml
-  - include: backups.yml
+# need to add credentials for the backups
+# do this once ec2-consistent-backups can be installed
+# on CentOS
+#  - include: backups.yml
