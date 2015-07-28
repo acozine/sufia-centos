@@ -11,12 +11,11 @@
   vars:
     ec2_vol_1: "{{ hostvars['localhost'].ec2_vol }}"
   roles:
-    - { role: housekeeping, sudo: yes }
     - { role: ec2, sudo: yes }
+    - { role: housekeeping, sudo: yes }
     - { role: ruby }
     - { role: hydra-stack }
     - { role: services }
     - { role: passenger, sudo: yes }
     - { role: marmotta }
     - { role: app-config, sudo: yes }
-#    - { role: ec2, sudo: yes }
