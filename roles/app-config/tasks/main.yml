@@ -1,5 +1,4 @@
 ---
 - include: systems.yml
 - include: apache.yml
-- include: initializers.yml
 - include: alex2.yml
