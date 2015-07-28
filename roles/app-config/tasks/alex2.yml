@@ -5,6 +5,10 @@
       - ezid.yml
       - smtp.yml
       - fedora.yml
+      
+- name: add alex2 shared templates
+  template: src={{ item }} dest=/opt/{{ project_name }}/shared/config/{{ item }} owner={{ capistrano_user }} group={{ capistrano_group }} backup=no
+      - ldap.yml.j2
 
 - name: add config/environments directory
   file: path=/opt/{{ project_name }}/shared/config/environments owner={{ capistrano_user }} group={{ capistrano_group }} state=directory
