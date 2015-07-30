@@ -25,9 +25,9 @@
   - set postgres password
   - configure md5 security
   - restart postgres server
+  - create pg hydra user
   - create pg hydra database
-  - add pg hydra user
-
+  
 - name: create pg_backups directory
   sudo: yes
   file: owner=postgres group=postgres state=directory path=/opt/pg_backups
