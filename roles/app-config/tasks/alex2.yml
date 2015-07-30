@@ -8,6 +8,7 @@
       
 - name: add alex2 shared templates
   template: src={{ item }} dest=/opt/{{ project_name }}/shared/config/{{ item }} owner={{ capistrano_user }} group={{ capistrano_group }} backup=no
+  with_items:
       - ldap.yml.j2
 
 - name: add config/environments directory
