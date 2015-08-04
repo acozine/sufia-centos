@@ -25,3 +25,10 @@ To use this project with [Vagrant](http://docs.vagrantup.com/v2/):
 5. clone this project as the `provisioning` sub-directory of your Vagrant project  
 6. run `vagrant up`
 
+To run the Ansible provisioning scripts against a minimal Centos 7 server via ssh:
+
+1. edit the `hosts` file in this directory and replace the ip address for hydra-head with your server's IP
+2. create an installation user with passwordless sudo access on your server.  We called ours `centos`.  If you use a different name, edit the remote\_user entry in vanilla.yml
+3. add the public key for your install user on the server in the users's .ssh/authorized\_keys file 
+4. run `ansible-playbook -i hosts vanilla.yml` from the root directory of this repo on your local machine
+
