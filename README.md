@@ -8,7 +8,7 @@ To create an ec2 instance:
 2. add your organization's AWS credentials there
 3. create a new vars/main.yml file in the services role  
 4. override any default variables you wish to change there (we definitely recommend overriding the postgresql database, user, and password settings)  
-5. run `ansible-playbook -i hosts --private-key /path/to/your/keypair.pem ec2.yml` (if you encrypt your variables with ansible-vault, add `--ask-vault-pass`)  
+5. run `ansible-playbook --private-key /path/to/your/keypair.pem ec2.yml` (if you encrypt your variables with ansible-vault, add `--ask-vault-pass`)  
 
 This project expects your code to be deployed with [Capistrano](http://capistranorb.com/). In your Hydra head (the codebase you're deploying), set the Capistrano `:deploy_to` directory to match the housekeeping role's `project_name` variable. If you use the default value for `project_name` in the housekeeping role, you should use 
 ```
@@ -30,5 +30,5 @@ To run the Ansible provisioning scripts against a minimal Centos 7 server via ss
 1. edit the `hosts` file in this directory and replace the ip address for hydra-head with your server's IP
 2. create an installation user with passwordless sudo access on your server.  We called ours `centos`.  If you use a different name, edit the remote\_user entry in vanilla.yml
 3. add the public key for your install user on the server in the users's .ssh/authorized\_keys file 
-4. run `ansible-playbook -i hosts vanilla.yml` from the root directory of this repo on your local machine
+4. run `ansible-playbook vanilla.yml` from the root directory of this repo on your local machine
 
