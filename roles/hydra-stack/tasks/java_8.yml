@@ -1,0 +1,20 @@
+---
+- name: install JDK 1.8
+  sudo: yes
+  copy: src=jdk-8u51-linux-x64.tar.gz dest={{ install_path }}/
+
+- name: untar java 8
+  become: yes
+  unarchive: src={{ install_path }}/jdk-8u51-linux-x64.tar.gz dest={{ install_path }}/ creates={{ install_path }}/jdk1.8.0_51/README.html owner=root group=root copy=no
+
+- name: install java 8 as first alternative
+  alternatives: name={{ item }} link=/usr/bin/{{ item }} path={{ install_path }}/jdk1.8.0_51/bin/{{ item }}
+  sudo: yes
+  with_items:
+      - java
+      - jar
+      - javac
+      
+#  sudo alternatives --install /usr/bin/java java /opt/{{ install_path }/jdk1.8.0_51/bin/java 1
+#  sudo alternatives --install /usr/bin/jar jar /opt/{{ install_path }/jdk1.8.0_51/bin/jar 1
+#  sudo alternatives --install /usr/bin/javac javac /opt/{{ install_path }/jdk1.8.0_51/bin/javac 1

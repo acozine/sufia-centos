@@ -1,0 +1,6 @@
+# to install Oracle Java 8, you must first
+# visit the Oracle downloads page at http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html
+# accept the License Agreement
+# download jdk-8u51-linux-x64.tar.gz
+# and place it in the same directory as this README file 
+# (roles/hydra-stack/files/)
