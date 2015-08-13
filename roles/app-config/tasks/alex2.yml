@@ -7,9 +7,7 @@
       - fedora.yml
       
 - name: add alex2 shared templates
-  template: src={{ item }} dest=/opt/{{ project_name }}/shared/config/{{ item }} owner={{ capistrano_user }} group={{ capistrano_group }} backup=no
-  with_items:
-      - ldap.yml.j2
+  template: src=ldap.yml.j2 dest=/opt/{{ project_name }}/shared/config/ldap.yml owner={{ capistrano_user }} group={{ capistrano_group }} backup=no
 
 - name: add config/environments directory
   file: path=/opt/{{ project_name }}/shared/config/environments owner={{ capistrano_user }} group={{ capistrano_group }} state=directory

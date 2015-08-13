@@ -1,6 +1,7 @@
 ---
+- include: java_8.yml
 - include: tomcat.yml
 - include: solr.yml
-- include: fedora.yml
+- include: fedora430.yml
 - include: hydra_rails_config.yml
  

@@ -1,6 +1,12 @@
-This Ansible project was created by Data Curation Experts based on work sponsored by the Chemical Heritage Foundation. It builds a production-style Hydra head on a CentOS 7 Amazon EC2 instance.
+This Ansible project was created by Data Curation Experts based on work sponsored by the Chemical Heritage Foundation. It builds a production-style Hydra head on CentOS 7 - on Amazon EC2, on a Vagrant vm, or on a bare-bones box in your server environment.
 
-Before you can use this project, you must [install Ansible](http://docs.ansible.com/intro_installation.html).
+Before you can use this project, you must:
+
+1. install [Ansible](http://docs.ansible.com/intro_installation.html).
+2. visit the [Oracle downloads page](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
+3. accept Oracle's License Agreement for Java 8
+4. download the Java SE Development Kit 8u51 as a tarball from Oracle - the one you want is `Linux x64      165.25 MB        jdk-8u51-linux-x64.tar.gz`
+5. place the file in roles/hydra-stack/files/jdk-8u51-linux-x64.tar.gz
 
 To create an ec2 instance:
 
