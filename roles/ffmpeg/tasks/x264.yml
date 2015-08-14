@@ -1,0 +1,16 @@
+---
+- name: download x264 source
+  become: yes
+  git: repo=git://git.videolan.org/x264 depth=1 owner={{ install_user }} group={{ install_group }} dest={{ ffmpeg_path }}/x264
+
+- name: configure x264
+  become: yes
+  shell: cd {{ ffmpeg_path }}/x264 && ./configure --prefix="$HOME/ffmpeg_build" --bindir="$HOME/bin" --enable-static creates={{ ffmpeg_path }}/x264/Makefile
+
+- name: make x264
+  become: yes
+  shell: cd {{ ffmpeg_path }}/x264 && make 
+
+- name: install x264
+  sudo: yes
+  shell: cd {{ ffmpeg_path }}/x264 && make install
