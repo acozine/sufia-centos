@@ -1,0 +1,26 @@
+- name: provision production centos 7 host for ADRL 2.0
+  hosts: vanilla-hosts
+  remote_user: centos
+  vars:
+      capistrano_user: # user name for cap deployments
+      capistrano_group: # group for cap deployments
+      install_user: # unix user that performs installation
+      install_group: # group for install_user
+      become_user: # MUST HAVE THE SAME CONTENT AS install_user
+      project_name: alex2
+      rails_env: production
+      server_name: # FQDN of target machine, e.g. sandbox.ucsb.edu
+      pg_pass: # password for postgres admin user
+      hydra_db: # name of hydra pg database
+      hydra_pg_user: # user that owns hydra pg database
+      hydra_pg_pass: # password for hydra_pg_user
+      rails_secret_key_base: # run "rake secret" on a rails project, or use some other random string generator and paste result here
+  roles:
+    - { role: generic-centos, sudo: yes }
+    - { role: housekeeping, sudo: yes }
+    - { role: ruby }
+    - { role: hydra-stack }
+    - { role: services }
+    - { role: passenger, sudo: yes }
+    - { role: marmotta }
+    - { role: app-config, sudo: yes }
