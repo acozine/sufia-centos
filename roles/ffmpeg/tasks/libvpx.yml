@@ -1,14 +1,11 @@
 ---
 - name: download libvpx source
-  become: yes
   git: repo=http://git.chromium.org/webm/libvpx.git depth=1 owner={{ install_user }} group={{ install_group }} dest={{ ffmpeg_path }}/libvpx
 
 - name: configure libvpx
-  become: yes
-  shell: cd {{ ffmpeg_path }}/libvpx && ./configure --prefix="$HOME/ffmpeg_build" --disable-examples creates={{ ffmpeg_path }}/libvpx/Makefile
+  shell: cd {{ ffmpeg_path }}/libvpx && ./configure --disable-examples creates={{ ffmpeg_path }}/libvpx/Makefile
 
 - name: make libvpx
-  become: yes
   shell: cd {{ ffmpeg_path }}/libvpx && make 
 
 - name: install libvpx
