@@ -16,10 +16,10 @@
       - pkgconfig
       - zlib-devel
 
-- remove package ffmpeg
+- name: remove package ffmpeg
   yum: name=ffmpeg state=absent
 
-- create sources dir
+- name: create sources dir
   file: owner={{ install_user }} group={{ install_group }} state=directory path={{ ffmpeg_path }}
   register: ffmpeg_path={{ install_path }}/ffmpeg_sources
 
