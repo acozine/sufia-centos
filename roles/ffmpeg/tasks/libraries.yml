@@ -1,5 +1,6 @@
 ---
 - name: install libraries
+  sudo: yes
   yum: name={{ item }} state=present
   with_items:
       - autoconf
@@ -17,9 +18,11 @@
       - zlib-devel
 
 - name: remove package ffmpeg
+  sudo: yes
   yum: name=ffmpeg state=absent
 
 - name: create sources dir
+  become: yes
   file: owner={{ install_user }} group={{ install_group }} state=directory path={{ ffmpeg_path }}
   register: ffmpeg_path={{ install_path }}/ffmpeg_sources
 
