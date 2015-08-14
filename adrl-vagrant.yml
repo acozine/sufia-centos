@@ -2,8 +2,8 @@
   hosts: vagrant
   remote_user: vagrant
   vars:
-      capistrano_user: deploy
-      capistrano_group: deploy
+      capistrano_user: vagrant
+      capistrano_group: vagrant
       install_user: ucsb
       install_group: ucsb
       become_user: ucsb
