@@ -1,6 +1,17 @@
-- name: provision basic vagrant box
+- name: provision basic alex2 vagrant box
   hosts: vagrant
   remote_user: vagrant
+  vars:
+      capistrano_user: vagrant
+      capistrano_group: vagrant
+      install_user: ucsb
+      install_group: ucsb
+      become_user: ucsb
+      install_path: /opt/install
+      project_name: alex2
+      rails_env: production
+      server_name: vagrant.localhost
+      solr_context: hydra
   roles:
     - { role: vagrant, sudo: yes }
     - { role: housekeeping, sudo: yes }
