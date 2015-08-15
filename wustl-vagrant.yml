@@ -1,0 +1,15 @@
+- name: provision basic vagrant box
+  hosts: vagrant
+  remote_user: vagrant
+  vars:
+      install_user: vagrant
+      install_group: vagrant
+  roles:
+    - { role: vagrant, sudo: yes }
+    - { role: housekeeping, sudo: yes }
+    - { role: ruby }
+    - { role: hydra-stack }
+    - { role: services }
+    - { role: passenger, sudo: yes }
+    - { role: ffmpeg }
+#    - { role: app-config, sudo: yes }
