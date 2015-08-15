@@ -1,0 +1,13 @@
+---
+# can I add a check here that if ffmpeg is already configured and installed
+# I skip the whole rest of the role?
+- include: libraries.yml
+- include: yasm.yml
+- include: x264.yml
+- include: libfdk_aac.yml
+- include: libmp3lame.yml
+- include: libopus.yml
+- include: libogg.yml
+- include: libvorbis.yml
+- include: libvpx.yml
+- include: ffmpeg.yml

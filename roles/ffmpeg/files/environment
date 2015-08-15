@@ -1,0 +1,2 @@
+LD_LIBRARY_PATH=/usr/local/lib
+PKG_CONFIG_PATH=/usr/local/lib/pkgconfig

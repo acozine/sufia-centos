@@ -1,0 +1,35 @@
+---
+- name: install libraries
+  sudo: yes
+  yum: name={{ item }} state=present
+  with_items:
+      - autoconf
+      - automake
+      - cmake
+      - freetype-devel
+      - gcc
+      - gcc-c++
+      - git
+      - libtool
+      - make
+      - mercurial
+      - nasm
+      - pkgconfig
+      - zlib-devel
+
+- name: remove package ffmpeg
+  sudo: yes
+  yum: name=ffmpeg state=absent
+
+- name: create sources dir
+  sudo: yes
+  file: owner=vagrant group=vagrant state=directory path={{ ffmpeg_path }}
+  register: ffmpeg_path={{ install_path }}/ffmpeg_sources
+
+- name: place environment file for ffmpeg
+  sudo: yes
+  copy: src=environment dest=/etc/environment
+
+- name: source /etc/environment file
+  sudo: yes
+  shell: source /etc/environment

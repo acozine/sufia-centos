@@ -1,0 +1,4 @@
+---
+install_user: install
+install_group: install
+ffmpeg_path: /opt/install/ffmpeg_sources

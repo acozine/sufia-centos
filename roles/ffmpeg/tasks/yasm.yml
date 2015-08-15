@@ -1,0 +1,32 @@
+---
+- name: download yasm source
+  git: repo=git://github.com/yasm/yasm.git depth=1 accept_hostkey=yes dest={{ ffmpeg_path }}/yasm
+
+- name: clean the yasm repo
+  shell: cd {{ ffmpeg_path }}/yasm && autoreconf -fiv # ./autogen.sh
+
+- name: configure yasm
+  shell: cd {{ ffmpeg_path }}/yasm && ./configure
+
+- name: make yasm
+  shell: cd {{ ffmpeg_path }}/yasm && make
+
+- name: install yasm
+  sudo: yes
+  shell: cd {{ ffmpeg_path }}/yasm && make install
+
+#- name: download yasm source
+#  get_url: url=http://www.tortall.net/projects/yasm/releases/yasm-1.2.0.tar.gz owner={{ install_user }} group={{ install_group }} dest={{ ffmpeg_path }}/yasm-1.2.0.tar.gz
+
+#- name: unzip yasm source
+#  unarchive: src={{ ffmpeg_path }}/yasm-1.2.0.tar.gz dest={{ ffmpeg_path }}/ creates={{ ffmpeg_path }}/yasm-1.2.0/compile.c copy=no
+
+#- name: configure yasm
+#  shell: cd {{ ffmpeg_path }}/yasm-1.2.0 && ./configure --prefix="$HOME/ffmpeg_build" --bindir="$HOME/bin" creates={{ ffmpeg_path }}/yasm-1.2.0/Makefile
+
+#- name: make yasm
+#  shell: cd {{ ffmpeg_path }}/yasm-1.2.0 && make 
+
+#- name: install yasm
+#  sudo: yes
+#  shell: cd {{ ffmpeg_path }}/yasm-1.2.0 && make install
