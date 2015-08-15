@@ -14,3 +14,7 @@
 - name: install libopus
   sudo: yes
   shell: cd {{ ffmpeg_path }}/opus-1.0.3 && make install
+
+- name: run ldconfig for libopus
+  sudo: yes
+  shell: executable=/bin/bash chdir={{ ffmpeg_path }}/opus-1.0.3 /usr/sbin/ldconfig

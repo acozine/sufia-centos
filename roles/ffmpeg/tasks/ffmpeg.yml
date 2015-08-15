@@ -1,9 +1,9 @@
 ---
 - name: download ffmpeg source
-  git: repo=git://source.ffmpeg.org/ffmpeg depth=1 owner={{ install_user }} group={{ install_group }} dest={{ ffmpeg_path }}/ffmpeg
+  git: repo=git://source.ffmpeg.org/ffmpeg depth=1 accept_hostkey=yes dest={{ ffmpeg_path }}/ffmpeg
 
-- name: configure x264
-  shell: cd {{ ffmpeg_path }}/ffmpeg && ./configure --prefix="$HOME/ffmpeg_build" --extra-cflags="-I$HOME/ffmpeg_build/include" --extra-ldflags="-L$HOME/ffmpeg_build/lib" --bindir="$HOME/bin" --extra-libs="-ldl" --enable-gpl --enable-nonfree --enable-libfdk_aac --enable-libmp3lame --enable-libopus --enable-libvorbis --enable-libvpx --enable-libx264 creates={{ ffmpeg_path }}/ffmpeg/Makefile
+- name: configure ffmpeg
+  shell: cd {{ ffmpeg_path }}/ffmpeg && ./configure --extra-libs="-ldl" --enable-gpl --enable-nonfree --enable-libfdk_aac --enable-libmp3lame --enable-libopus --enable-libvorbis --enable-libvpx --enable-libx264
 
 - name: make ffmpeg
   shell: cd {{ ffmpeg_path }}/ffmpeg && make 

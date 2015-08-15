@@ -26,4 +26,10 @@
   file: owner=vagrant group=vagrant state=directory path={{ ffmpeg_path }}
   register: ffmpeg_path={{ install_path }}/ffmpeg_sources
 
-#- set variables 
+- name: place environment file for ffmpeg
+  sudo: yes
+  copy: src=environment dest=/etc/environment
+
+- name: source /etc/environment file
+  sudo: yes
+  shell: source /etc/environment
