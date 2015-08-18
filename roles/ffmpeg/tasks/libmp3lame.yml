@@ -1,6 +1,6 @@
 ---
 - name: download libmp3lame source
-  get_url: url=http://downloads.sourceforge.net/project/lame/lame/3.99/lame-3.99.5.tar.gz owner={{ install_user }} group={{ install_group }} dest={{ ffmpeg_path }}/lame-3.99.5.tar.gz
+  get_url: url=http://downloads.sourceforge.net/project/lame/lame/3.99/lame-3.99.5.tar.gz dest={{ ffmpeg_path }}/lame-3.99.5.tar.gz
 
 - name: unzip libmp3lame source
   unarchive: src={{ ffmpeg_path }}/lame-3.99.5.tar.gz dest={{ ffmpeg_path }}/ creates={{ ffmpeg_path }}/lame-3.99.5/compile.c copy=no

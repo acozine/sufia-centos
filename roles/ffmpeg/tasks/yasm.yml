@@ -1,8 +1,8 @@
 ---
-- name: download yasm source
-  git: repo=git://github.com/yasm/yasm.git depth=1 accept_hostkey=yes dest={{ ffmpeg_path }}/yasm
+- name: clone yasm source
+  git: repo=git://github.com/yasm/yasm.git depth=1 accept_hostkey=yes dest={{ ffmpeg_path }}/yasm force=yes
 
-- name: clean the yasm repo
+- name: reconfigure the yasm repo
   shell: cd {{ ffmpeg_path }}/yasm && autoreconf -fiv # ./autogen.sh
 
 - name: configure yasm
@@ -14,6 +14,14 @@
 - name: install yasm
   sudo: yes
   shell: cd {{ ffmpeg_path }}/yasm && make install
+
+- name: clean the yasm repo
+  sudo: yes
+  shell: cd {{ ffmpeg_path }}/yasm && make distclean # ./autogen.sh
+
+- name: run ldconfig for yasm
+  sudo: yes
+  shell: executable=/bin/bash chdir={{ ffmpeg_path }}/yasm /usr/sbin/ldconfig
 
 #- name: download yasm source
 #  get_url: url=http://www.tortall.net/projects/yasm/releases/yasm-1.2.0.tar.gz owner={{ install_user }} group={{ install_group }} dest={{ ffmpeg_path }}/yasm-1.2.0.tar.gz

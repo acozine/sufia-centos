@@ -23,7 +23,7 @@
 
 - name: create sources dir
   sudo: yes
-  file: owner=vagrant group=vagrant state=directory path={{ ffmpeg_path }}
+  file: owner=centos group=centos state=directory path={{ ffmpeg_path }}
   register: ffmpeg_path={{ install_path }}/ffmpeg_sources
 
 - name: place environment file for ffmpeg
