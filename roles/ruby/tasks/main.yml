@@ -12,11 +12,11 @@
 
 - name: download ruby
   become: yes
-  get_url: url=http://cache.ruby-lang.org/pub/ruby/2.2/ruby-2.2.2.tar.gz owner={{ install_user }} group={{ install_group }} dest={{ install_path }}/ruby-2.2.2.tar.gz
+  get_url: url=https://cache.ruby-lang.org/pub/ruby/2.2/ruby-2.2.3.tar.gz owner={{ install_user }} group={{ install_group }} dest={{ install_path }}/ruby-2.2.3.tar.gz
   
 - name: unzip ruby file
   become: yes
-  unarchive: src={{ install_path }}/ruby-2.2.2.tar.gz dest={{ install_path }}/ creates={{ install_path }}/ruby-2.2.2/compile.c copy=no
+  unarchive: src={{ install_path }}/ruby-2.2.3.tar.gz dest={{ install_path }}/ creates={{ install_path }}/ruby-2.2.3/compile.c copy=no
 
 - name: check if ruby is installed
   sudo: yes
@@ -25,16 +25,16 @@
 
 - name: configure ruby
   become: yes
-  shell: cd {{ install_path }}/ruby-2.2.2 && ./configure --enable-shared creates={{ install_path }}/ruby-2.2.2/Makefile
+  shell: cd {{ install_path }}/ruby-2.2.3 && ./configure --enable-shared creates={{ install_path }}/ruby-2.2.3/Makefile
   
 - name: make ruby
   become: yes
-  shell: cd {{ install_path }}/ruby-2.2.2 && make 
+  shell: cd {{ install_path }}/ruby-2.2.3 && make 
   when: ruby.stat.exists == False
 
 - name: install ruby
   sudo: yes
-  shell: cd {{ install_path }}/ruby-2.2.2 && make install creates=/usr/local/bin/ruby
+  shell: cd {{ install_path }}/ruby-2.2.3 && make install creates=/usr/local/bin/ruby
   when: ruby.stat.exists == False
 
 - name: symlink ruby for root
