@@ -42,5 +42,6 @@
     # - redis
     - git
     - xfsprogs
+    - libreoffice
     # this was in the ubuntu package list
     #    - libxvidcore-dev
