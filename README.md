@@ -14,7 +14,7 @@ To create an ec2 instance:
 2. add your organization's AWS credentials there
 3. create a new vars/main.yml file in the services role  
 4. override any default variables you wish to change there (we definitely recommend overriding the postgresql database, user, and password settings)  
-5. run `ansible-playbook --private-key /path/to/your/keypair.pem ec2.yml` (if you encrypt your variables with ansible-vault, add `--ask-vault-pass`)  
+5. run `ansible-playbook --private-key /path/to/your/keypair.pem ec2.yml` (if you encrypt your variables with ansible-vault, add `--ask-vault-pass`; if you are not using passwordless sudo, add `--ask-sudo-pass` or `-K`)  
 
 This project expects your code to be deployed with [Capistrano](http://capistranorb.com/). In your Hydra head (the codebase you're deploying), set the Capistrano `:deploy_to` directory to match the housekeeping role's `project_name` variable. If you use the default value for `project_name` in the housekeeping role, you should use 
 ```
