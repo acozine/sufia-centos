@@ -42,6 +42,7 @@
     # - redis
     - git
     - xfsprogs
+    - mod_xsendfile
     - libreoffice-headless
     # this was in the ubuntu package list
     #    - libxvidcore-dev
