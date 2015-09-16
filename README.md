@@ -39,16 +39,38 @@ To use this project with [Vagrant](http://docs.vagrantup.com/v2/):
 
 To run the Ansible provisioning scripts against a minimal Centos 7 server via ssh:
 
-1. edit the `hosts` file in this directory and replace the ip address for hydra-head with your server's IP
-2. create an installation user with passwordless sudo access on your server.  We called ours `centos`.  If you use a different name, edit the remote\_user entry in vanilla.yml
-3. add the public key for your install user on the server in the users's .ssh/authorized\_keys file 
+1. create an installation user with passwordless sudo access on your server.  We called ours `centos`.  If you use a different name, edit the remote\_user entry in vanilla.yml
+2. add the public key for your install user on the server in the users's .ssh/authorized\_keys file.  For help setting up public key authentication, see the [Centos WIKI](https://wiki.centos.org/HowTos/Network/SecuringSSH#head-9c5717fe7f9bb26332c9d67571200f8c1e4324bc) 
+3. these scripts assume that you have a separate virtual drive available for the application installation at dev/sdc (assuming sda is your main system drive and sdb is your swap drive).  
+3. edit the `hosts` file in this directory and replace the ip address for hydra-head with your server's IP
 4. edit the `vars:` section of the vanilla.yml file and enter data for your system - see the commented lines
 5. run `ansible-playbook vanilla.yml` from the root directory of this repo on your local machine
 
 ## Next Steps
 
-This project expects your code to be deployed with [Capistrano](http://capistranorb.com/). In your Hydra head (the codebase you're deploying), set the Capistrano `:deploy_to` directory to match the housekeeping role's `project_name` variable. If you use the default value for `project_name` in the housekeeping role, you should use 
+This project expects your code to be deployed with [Capistrano](http://capistranorb.com/). If your project doesn't already use 
+Capistrano and have at least one deployment stage defined, that's a little beyond us here - go look at the Capistrano getting started 
+documentation and then come back here.
+
+You'll need to update your Hydra head (your application repository) to define a new stage corresponding to the environment you've just set up.  
+We usually give our stages name that help identify the server(s) they run on: e.g. demo, sandbox, stage, prod, etc.  Copy one of the existing stage files in your project (under `config/deploy`) to a new stage file.
+
+ 
+In your stage file, set the Capistrano `:deploy_to` directory to match the Ansible housekeeping role's 
+`project_name` variable. In `config/deploy.rb` and/or in `config/deploy/<yourenv>.rb` (depending on your project structure), 
+add a line like:  
+
 ```
 set :deploy_to, '/opt/sufia-project'
 ```
-in `config/deploy.rb` and/or in `config/deploy/<yourenv>.rb`  
+ 
+If you use the default value for `project_name` in the housekeeping role, this is the exact line you need.
+
+1. in the main project repo for your rails application, create a new cap stage by copying one of the existing sage files in the `config/deploy` directory
+2. edit your new stage file
+    a. edit the line that says `set :stage, ` and add your stage name.  It's easiest to use the same name for the file and the stage.
+    b. edit (or add) the line that says `set :deploy_to, '/opt/...' and set ... to the `project_name` you set in your Ansible YAML file varialbes
+3. run `cap {stage-name} deploy` where {stage-name} is the file and stage name you set in steps 1 & 2.  
+4. after you run run capistrano the first time (and only the first time), restart Tomcat using `sudo systemctl restart tomcat`
+5. Your application should be up and running, check it in your browser!
+   
