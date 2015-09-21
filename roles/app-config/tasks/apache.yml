@@ -5,3 +5,7 @@
 - name: remove default apache site
   file: path=/etc/httpd/conf.d/welcome.conf state=absent
 
+- name: add mod_xsendfile
+  yum: name=mod_xsendfile state=present
+
+
