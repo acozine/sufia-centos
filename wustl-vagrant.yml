@@ -12,4 +12,5 @@
     - { role: services }
     - { role: passenger, sudo: yes }
     - { role: ffmpeg }
+    - { role: imagemagick }
 #    - { role: app-config, sudo: yes }

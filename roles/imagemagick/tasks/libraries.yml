@@ -1,0 +1,27 @@
+---
+- name: install IM libraries
+  sudo: yes
+  yum: name={{ item }} state=present
+  with_items:
+      - fontconfig-devel
+      - freetype-devel
+      - libtool-ltdl-devel
+      - autoconf
+      - automake
+      - cmake
+      - gcc
+      - gcc-c++
+      - libtool
+      - make
+      - mercurial
+      - pkgconfig
+      - zlib-devel
+
+- name: remove package imagemagick
+  sudo: yes
+  yum: name=imagemagick state=absent
+
+- name: create IM sources dir
+  sudo: yes
+  file: owner={{ install_user }} group={{ install_group }} state=directory path={{ magick_path }}
+  register: magick_path={{ install_path }}/imagemagick_sources

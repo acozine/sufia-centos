@@ -1,0 +1,8 @@
+---
+# can I add a check here that if ffmpeg is already configured and installed
+# I skip the whole rest of the role?
+- include: libraries.yml
+- include: openjpg.yml
+- include: libtiff.yml
+- include: libpng.yml
+- include: imagemagick.yml
