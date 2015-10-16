@@ -9,11 +9,11 @@
 
 - name: download solr tarball
   become: yes
-  get_url: url=http://archive.apache.org/dist/lucene/solr/4.10.3/solr-4.10.3.tgz dest={{ install_path }}/solr-4.10.3.tgz force=no
+  get_url: url=http://archive.apache.org/dist/lucene/solr/4.10.4/solr-4.10.4.tgz dest={{ install_path }}/solr-4.10.4.tgz force=no
 
 - name: untar solr tarball
   become: yes
-  unarchive: src={{ install_path }}/solr-4.10.3.tgz dest={{ install_path }}/ creates={{ install_path }}/solr-4.10.3/bin/solr copy=no
+  unarchive: src={{ install_path }}/solr-4.10.4.tgz dest={{ install_path }}/ creates={{ install_path }}/solr-4.10.4/bin/solr copy=no
 
 - name: check solr dir
   become: yes
@@ -27,23 +27,23 @@
 
 - name: copy over war file
   sudo: yes
-  command: cp {{ install_path }}/solr-4.10.3/dist/solr-4.10.3.war /opt/solr/
+  command: cp {{ install_path }}/solr-4.10.4/dist/solr-4.10.4.war /opt/solr/
 
-- name: copy over dist jars
+- name: copy over dist dir
   sudo: yes
-  shell: cp {{ install_path }}/solr-4.10.3/dist/*.jar /opt/solr/lib/
+  shell: cp -r {{ install_path }}/solr-4.10.4/dist /opt/solr/lib/
 
 - name: copy over contrib dir
   sudo: yes
-  command: cp -r {{ install_path }}/solr-4.10.3/contrib /opt/solr/lib/
+  command: cp -r {{ install_path }}/solr-4.10.4/contrib /opt/solr/lib/
 
 - name: copy over example collection
   sudo: yes
-  command: cp -r --remove-destination {{ install_path }}/solr-4.10.3/example/solr/collection1 /opt/solr/
+  command: cp -r --remove-destination {{ install_path }}/solr-4.10.4/example/solr/collection1 /opt/solr/
 
 - name: copy logging jars
   sudo: yes
-  shell: cp {{ install_path }}/solr-4.10.3/example/lib/ext/*.jar /usr/share/tomcat/lib/
+  shell: cp {{ install_path }}/solr-4.10.4/example/lib/ext/*.jar /usr/share/tomcat/lib/
 
 - name: set ownership and group for solr
   sudo: yes
@@ -51,7 +51,7 @@
 
 - name: copy log4j properties file
   sudo: yes
-  shell: cp {{ install_path }}/solr-4.10.3/example/resources/log4j.properties /usr/share/java/tomcat/
+  shell: cp {{ install_path }}/solr-4.10.4/example/resources/log4j.properties /usr/share/java/tomcat/
 
 - name: set ownership and group for tomcat
   sudo: yes
