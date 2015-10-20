@@ -1,6 +1,13 @@
 ---
+- name: debug
+  shell: whoami
+  register: user
+
+- name: what user am I
+  debug: var=user
+
 - name: clone yasm source
-  git: repo=git://github.com/yasm/yasm.git depth=1 accept_hostkey=yes dest={{ ffmpeg_path }}/yasm force=yes
+  git: repo=https://github.com/yasm/yasm.git depth=1 accept_hostkey=yes dest={{ ffmpeg_path }}/yasm force=yes
 
 - name: reconfigure the yasm repo
   shell: cd {{ ffmpeg_path }}/yasm && autoreconf -fiv # ./autogen.sh
