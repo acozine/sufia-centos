@@ -23,5 +23,5 @@
 
 - name: create IM sources dir
   sudo: yes
-  file: owner={{ install_user }} group={{ install_group }} state=directory path={{ magick_path }}
+  file: owner=centos group=centos state=directory path={{ magick_path }}
   register: magick_path={{ install_path }}/imagemagick_sources
