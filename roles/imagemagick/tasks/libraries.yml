@@ -25,3 +25,7 @@
   sudo: yes
   file: owner=centos group=centos state=directory path={{ magick_path }}
   register: magick_path={{ install_path }}/imagemagick_sources
+
+- name: add config for /usr/local/lib to ldconfig
+  sudo: yes
+  copy: dest=/etc/ld.so.conf.d/usr-local.conf content=/usr/local/lib owner=root group=root mode=0644 
