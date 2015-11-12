@@ -1,5 +1,5 @@
 ---
-install_user: install
-install_group: install
-become_user: install
+# install_user: install
+# install_group: install
+# become_user: install
 magick_path: /opt/install/imagemagick_sources

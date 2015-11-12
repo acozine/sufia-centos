@@ -24,7 +24,6 @@
 - name: create IM sources dir
   sudo: yes
   file: owner={{ ansible_ssh_user }} group={{ ansible_ssh_user }} state=directory path={{ magick_path }}
-  register: magick_path={{ install_path }}/imagemagick_sources
 
 - name: add config for /usr/local/lib to ldconfig
   sudo: yes
