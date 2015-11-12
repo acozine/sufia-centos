@@ -1,0 +1,4 @@
+---
+hydra_repo: https://github.com/curationexperts/goldenseal.git
+hydra_name: goldenseal
+local_user: vagrant

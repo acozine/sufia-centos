@@ -1,0 +1,12 @@
+---
+- name: clone the code
+  git: clone=yes dest=/home/{{ local_user }}/{{ hydra_name }} repo={{ hydra_repo }}
+
+- name: configure dev environment
+  shell: bin/setup chdir=/home/{{ local_user }}/{{ hydra_name }}
+
+- name: (re)create jetty
+  command: rake jetty:clean chdir=/home/{{ local_user }}/{{ hydra_name }}
+
+- name: configure jetty
+  command: rake curation_concerns:jetty:config chdir=/home/{{ local_user }}/{{ hydra_name }}
