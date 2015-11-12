@@ -1,12 +1,7 @@
 ---
-#- name: get JDK 1.8 tarball (as RPM file)
-#  command: curl -L  -H 'Cookie:oraclelicense=accept-securebackup-cookie'  -o jdk-8u51-linux-x64.rpm  http://download.oracle.com/otn-pub/java/jdk/8u51-b16/jdk-8u51-linux-x64.rpm
-#  args:
-#    creates: "{{ install_path }}/jdk-8u51-linux-x64.rpm"
-
 - name: download fedora
   become: yes
-  get_url: url=http://repo1.maven.org/maven2/org/fcrepo/fcrepo-webapp/4.3.0/fcrepo-webapp-4.3.0.war owner={{ install_user }} group={{ install_group }} dest={{ install_path }}/fcrepo-webapp-4.3.0.war
+  get_url: url=http://repo1.maven.org/maven2/org/fcrepo/fcrepo-webapp/4.4.0/fcrepo-webapp-4.4.0.war owner={{ install_user }} group={{ install_group }} dest={{ install_path }}/fcrepo-webapp-4.4.0.war
 
 - name: make fedora data dir
   file: owner=tomcat group=tomcat state=directory path=/opt/fedora-data
@@ -19,7 +14,7 @@
 
 - name: copy over fedora.war
   sudo: yes
-  command: cp {{ install_path }}/fcrepo-webapp-4.3.0.war /var/lib/tomcat/webapps/fedora.war
+  command: cp {{ install_path }}/fcrepo-webapp-4.4.0.war /var/lib/tomcat/webapps/fedora.war
   when: fedora_war.stat.exists == False
 
 - name: create tomcat config and java options
