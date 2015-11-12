@@ -11,11 +11,9 @@
   yum: name=ruby state=absent
 
 - name: download ruby
-  become: yes
-  get_url: url=https://cache.ruby-lang.org/pub/ruby/2.2/ruby-2.2.3.tar.gz owner={{ install_user }} group={{ install_group }} dest={{ install_path }}/ruby-2.2.3.tar.gz
+  get_url: url=https://cache.ruby-lang.org/pub/ruby/2.2/ruby-2.2.3.tar.gz owner={{ ansible_ssh_user }} group={{ ansible_ssh_user }} dest={{ install_path }}/ruby-2.2.3.tar.gz
   
 - name: unzip ruby file
-  become: yes
   unarchive: src={{ install_path }}/ruby-2.2.3.tar.gz dest={{ install_path }}/ creates={{ install_path }}/ruby-2.2.3/compile.c copy=no
 
 - name: check if ruby is installed
@@ -24,11 +22,9 @@
   register: ruby
 
 - name: configure ruby
-  become: yes
   shell: cd {{ install_path }}/ruby-2.2.3 && ./configure --enable-shared creates={{ install_path }}/ruby-2.2.3/Makefile
   
 - name: make ruby
-  become: yes
   shell: cd {{ install_path }}/ruby-2.2.3 && make 
   when: ruby.stat.exists == False
 

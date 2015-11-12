@@ -2,8 +2,3 @@
 #ruby_version: 2.2
 #rails_version: 4.2.0
 install_path: /opt/install
-install_user: install
-install_group: install
-become_user: install
-#  environment:
-#    install_path: /opt/install
