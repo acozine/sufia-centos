@@ -1,5 +1,5 @@
 ---
-- name: link newly installed libraries
+- name: link libraries built from source
   sudo: yes
   shell: /usr/sbin/ldconfig
 
@@ -18,4 +18,8 @@
 - name: install ImageMagick
   sudo: yes
   shell: cd {{ magick_path }}/ImageMagick-6.9.2-5 && make install
+
+- name: link new imagemagick
+  sudo: yes
+  shell: /usr/sbin/ldconfig
 
