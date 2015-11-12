@@ -4,8 +4,8 @@
   yum: name=unzip state=present
 
 - name: download fits zip
-  become: yes
-  get_url: url=https://fits.googlecode.com/files/fits-0.6.2.zip owner={{ install_user }} group={{ install_group }} dest={{ install_path }}/fits-0.6.2.zip
+  # become: yes
+  get_url: url=https://fits.googlecode.com/files/fits-0.6.2.zip owner={{ ansible_ssh_user }} group={{ ansible_ssh_user }} dest={{ install_path }}/fits-0.6.2.zip
   # url=http://projects.iq.harvard.edu/files/fits/files/fits-0.8.4.zip 
   
 - name: unpack fits
