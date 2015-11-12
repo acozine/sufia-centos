@@ -1,1 +1,0 @@
-Put the jdk tarball in this directory.

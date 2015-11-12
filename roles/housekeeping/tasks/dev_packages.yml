@@ -23,6 +23,7 @@
     - rpm-build
     - rpm-sign
     # other packages
+    - java-1.8.0-openjdk
     - screen
     - wget
     - curl-devel
