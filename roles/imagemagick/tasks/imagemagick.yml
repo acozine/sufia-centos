@@ -1,5 +1,5 @@
 ---
-- name: link libraries built from source
+- name: link image libraries built from source
   sudo: yes
   shell: /usr/sbin/ldconfig
 
