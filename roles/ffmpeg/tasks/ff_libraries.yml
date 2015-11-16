@@ -23,18 +23,9 @@
 
 - name: create sources dir
   sudo: yes
-  #file: owner={{ install_user }} group={{ install_group }} state=directory path={{ ffmpeg_path }}
   file: owner={{ ansible_ssh_user }} group={{ ansible_ssh_user }} state=directory path={{ ffmpeg_path }}
   register: ffmpeg_path={{ install_path }}/ffmpeg_sources
 
 - name: ff add ldconfig for /usr/local/lib
   sudo: yes
   copy: dest=/etc/ld.so.conf.d/usr-local.conf content=/usr/local/lib owner=root group=root mode=0644 
-
-- name: place environment file for ffmpeg
-  sudo: yes
-  copy: src=environment dest=/etc/environment
-
-- name: source /etc/environment file
-  sudo: yes
-  shell: source /etc/environment
