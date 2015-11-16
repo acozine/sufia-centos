@@ -26,9 +26,9 @@
   sudo: yes
   shell: cd {{ ffmpeg_path }}/yasm && make distclean # ./autogen.sh
 
-- name: run ldconfig for yasm
-  sudo: yes
-  shell: executable=/bin/bash chdir={{ ffmpeg_path }}/yasm /usr/sbin/ldconfig
+#- name: run ldconfig for yasm
+#  sudo: yes
+#  shell: executable=/bin/bash chdir={{ ffmpeg_path }}/yasm /usr/sbin/ldconfig
 
 #- name: download yasm source
 #  get_url: url=http://www.tortall.net/projects/yasm/releases/yasm-1.2.0.tar.gz owner={{ install_user }} group={{ install_group }} dest={{ ffmpeg_path }}/yasm-1.2.0.tar.gz
