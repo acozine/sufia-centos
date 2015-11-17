@@ -6,4 +6,6 @@
     - { role: housekeeping, sudo: yes }
     - { role: ruby }
     - { role: services }
-
+    - { role: imagemagick }
+    - { role: ffmpeg }
+    - { role: dev-box }

@@ -5,6 +5,4 @@ capistrano_keys:
     - https://github.com/acozine.keys
     - https://github.com/jcoyne.keys
 install_path: /opt/install
-install_user: install
-install_group: install
 project_name: sufia-project

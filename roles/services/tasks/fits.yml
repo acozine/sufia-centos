@@ -4,16 +4,14 @@
   yum: name=unzip state=present
 
 - name: download fits zip
-  become: yes
-  get_url: url=https://fits.googlecode.com/files/fits-0.6.2.zip owner={{ install_user }} group={{ install_group }} dest={{ install_path }}/fits-0.6.2.zip
+  get_url: url=https://fits.googlecode.com/files/fits-0.6.2.zip owner={{ ansible_ssh_user }} group={{ ansible_ssh_user }} dest={{ install_path }}/fits-0.6.2.zip
   # url=http://projects.iq.harvard.edu/files/fits/files/fits-0.8.4.zip 
   
 - name: unpack fits
-  become: yes
   unarchive: src={{ install_path }}/fits-0.6.2.zip dest={{ install_path }}/ creates={{ install_path }}/fits-0.6.2/fits.sh copy=no
 
 - name: make fits executable
-  become: yes
+  sudo: yes
   file: path={{ install_path }}/fits-0.6.2/fits.sh mode=0755
 
 - name: copy fits
@@ -23,4 +21,3 @@
 - name: symlink fits
   sudo: yes
   file: src=/usr/local/bin/fits.sh dest=/usr/local/bin/fits state=link
-

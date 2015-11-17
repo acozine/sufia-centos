@@ -1,5 +1,2 @@
 ---
-install_user: install
-install_group: install
-become_user: install
 ffmpeg_path: /opt/install/ffmpeg_sources

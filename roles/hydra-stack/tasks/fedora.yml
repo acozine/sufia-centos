@@ -1,14 +1,12 @@
 ---
 - name: download fedora
-  become: yes
-  get_url: url=http://repo1.maven.org/maven2/org/fcrepo/fcrepo-webapp/4.4.0/fcrepo-webapp-4.4.0.war owner={{ install_user }} group={{ install_group }} dest={{ install_path }}/fcrepo-webapp-4.4.0.war
+  get_url: url=http://repo1.maven.org/maven2/org/fcrepo/fcrepo-webapp/4.4.0/fcrepo-webapp-4.4.0.war owner={{ ansible_ssh_user }} group={{ ansible_ssh_user }} dest={{ install_path }}/fcrepo-webapp-4.4.0.war
 
 - name: make fedora data dir
   file: owner=tomcat group=tomcat state=directory path=/opt/fedora-data
   sudo: yes
 
 - name: check fedora.war
-  become: yes
   stat: path=/var/lib/tomcat/webapps/fedora.war
   register: fedora_war
 

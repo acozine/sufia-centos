@@ -23,9 +23,8 @@
 
 - name: create IM sources dir
   sudo: yes
-  file: owner=centos group=centos state=directory path={{ magick_path }}
-  register: magick_path={{ install_path }}/imagemagick_sources
+  file: owner={{ ansible_ssh_user }} group={{ ansible_ssh_user }} state=directory path={{ magick_path }}
 
-- name: add config for /usr/local/lib to ldconfig
+- name: IM add ldconfig for /usr/local/lib
   sudo: yes
   copy: dest=/etc/ld.so.conf.d/usr-local.conf content=/usr/local/lib owner=root group=root mode=0644 
