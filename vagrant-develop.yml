@@ -1,5 +1,5 @@
 - name: provision basic vagrant box
-  hosts: vagrant
+  hosts: default
   remote_user: vagrant
   roles:
     - { role: vagrant, sudo: yes }
