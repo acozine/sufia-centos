@@ -6,6 +6,7 @@
       - fontconfig-devel
       - freetype-devel
       - libtool-ltdl-devel
+      - libpng-devel
       - autoconf
       - automake
       - cmake
