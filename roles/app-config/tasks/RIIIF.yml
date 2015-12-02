@@ -1,0 +1,6 @@
+---
+# projects that use RIIIF cache images files at /opt/{{ project_name }}/current/tmp/network_files
+# left alone, over time, these files will eat all the space on the disk
+- name: add cron job to delete old network_files
+  sudo: yes
+  template: src=rm_network_files.j2 dest=/etc/cron.d/network_files

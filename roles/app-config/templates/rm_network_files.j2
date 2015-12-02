@@ -1,0 +1,2 @@
+# cleans out files older than a week from the RIIIF cache
+find /opt/{{ project_name }}/current/tmp/network_files -mtime +7 -exec rm {} \;
