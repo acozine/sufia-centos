@@ -25,3 +25,10 @@
 - name: start resque
   service: name=resque-pool state=started enabled=yes
   sudo: yes
+
+- name: set redis and resque-pool to restart on reboot
+  sudo: yes
+  service: name={{ item }} enabled=yes
+  with_items:
+      - redis
+      - resque-pool

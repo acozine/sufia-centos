@@ -42,3 +42,6 @@
 
 - meta: flush_handlers
 
+- name: set postgres to restart on reboot
+  sudo: yes
+  service: name=postgresql enabled=yes

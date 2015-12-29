@@ -8,4 +8,8 @@
 - name: add mod_xsendfile
   yum: name=mod_xsendfile state=present
 
+- name: set apache to restart on reboot
+  sudo: yes
+  service: name=httpd enabled=yes
+
 
