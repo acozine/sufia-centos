@@ -1,0 +1,7 @@
+---
+# roles/ezid/tasks/main.yml
+- name: add ezid shared config
+  become: yes
+  template: src=ezid.yml.j2 dest=/opt/{{ project_name }}/shared/config/ezid.yml owner={{ capistrano_user }} group={{ capistrano_group }} backup=no
+
+      
