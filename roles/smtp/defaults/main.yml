@@ -1,0 +1,8 @@
+---
+# roles/smtp/defaults/main.yml
+project_name: sufia-project
+capistrano_user: deploy
+capistrano_group: deploy
+smtp_address: smtp.gmail.com,
+smtp_domain: gmail.com, 
+smtp_port: 587,
