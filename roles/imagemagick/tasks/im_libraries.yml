@@ -1,4 +1,7 @@
 ---
+# the rest of the imagemagick role is now exactly the same as the ubuntu version
+# to integrate, we should be able to use the distro-neutral package approach
+# with Ansible 2.0
 - name: install IM libraries
   sudo: yes
   yum: name={{ item }} state=present
