@@ -1,18 +1,8 @@
 ---
-- name: add alex2 shared config files
-  copy: src={{ item }} dest=/opt/{{ project_name }}/shared/config/{{ item }} owner={{ capistrano_user }} group={{ capistrano_group }} backup=no
-  with_items:
-      - ezid.yml
-      - smtp.yml
-      - fedora.yml
-      
-- name: add alex2 shared templates
-  template: src=ldap.yml.j2 dest=/opt/{{ project_name }}/shared/config/ldap.yml owner={{ capistrano_user }} group={{ capistrano_group }} backup=no
-
-- name: add config/environments directory
-  file: path=/opt/{{ project_name }}/shared/config/environments owner={{ capistrano_user }} group={{ capistrano_group }} state=directory
- 
-- name: add shared config/environments/production.rb
-  template: src=production.rb.j2 dest=/opt/{{ project_name }}/shared/config/environments/production.rb owner={{ capistrano_user }} group={{ capistrano_group }} backup=no
-
-      
+# roles/app-config/tasks/main.yml
+# alex2 project needs
+# ezid.yml (ezid role)
+# smtp.yml (smtp role)
+# fedora.yml (hydra-stack role)
+# ldap.yml (ldap role)
+# config/environments/production.rb (hostname role)

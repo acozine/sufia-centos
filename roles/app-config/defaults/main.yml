@@ -1,4 +1,5 @@
 ---
+# roles/app-config/defaults/main.yml
 project_name: sufia-project
 capistrano_user: deploy
 capistrano_group: deploy
