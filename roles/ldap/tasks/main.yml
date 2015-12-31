@@ -1,0 +1,5 @@
+---
+# roles/ldap/tasks/main.yml
+- name: add shared ldap config
+  become: yes
+  template: src=ldap.yml.j2 dest=/opt/{{ project_name }}/shared/config/ldap.yml owner={{ capistrano_user }} group={{ capistrano_group }} backup=no

@@ -1,0 +1,18 @@
+---
+# roles/ldap/defaults/main.yml
+project_name: sufia-project
+capistrano_user: deploy
+capistrano_group: deploy
+# the attribute is the unique property by which to find users
+# in openldap this is usually uid
+# in ActiveDirectory it's often sAMAccountName
+ldap_attribute: uid
+# the base is the tree within which the attribute is found
+ldap_base: ou=people,dc=dce,dc=com
+# the group_base is the tree within which the group "admin" is found
+ldap_group_base: ou=groups,dc=dce,dc=com
+ldap_host: ldap.curationexperts.com
+ldap_port: 389
+ldap_admin_user: cn=admin,dc=dce,dc=com
+ldap_admin_password: # add the password for your ldap/AD admin user here
+ldap_ssl: false

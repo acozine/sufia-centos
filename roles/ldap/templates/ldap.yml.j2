@@ -1,0 +1,13 @@
+## Environment
+default: &default
+  attribute: {{ ldap_attribute }}
+  base: {{ ldap_base }}
+  group_base: {{ ldap_group_base }}
+
+production:
+  host: {{ ldap_host }}
+  port: {{ ldap_port }}
+  admin_user: {{ ldap_admin_user }}
+  admin_password: {{ ldap_admin_password }}
+  ssl: {{ ldap_ssl }}
+  <<: *default
