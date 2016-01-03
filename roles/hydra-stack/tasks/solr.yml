@@ -42,6 +42,10 @@
   sudo: yes
   shell: cp {{ install_path }}/solr-4.10.4/example/lib/ext/*.jar /usr/share/tomcat/lib/
 
+- name: copy solr-cell jar for text extraction
+  sudo: yes
+  shell: cp {{ install_path }}/solr-4.10.4/dist/solr-cell-4.10.4.jar /opt/solr/lib/contrib/extraction/lib/
+
 - name: set ownership and group for solr
   sudo: yes
   shell: chown -R tomcat:tomcat /opt/solr
