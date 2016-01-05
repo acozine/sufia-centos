@@ -22,6 +22,7 @@
     instance: "{{ ec2.instance_ids }}"
     region: "{{ ec2_region }}"
     device_name: /dev/sdf
+    delete_on_termination: true
     volume_size: 40
     aws_access_key: "{{ ec2_access_key }}"
     aws_secret_key: "{{ ec2_secret_key }}"
