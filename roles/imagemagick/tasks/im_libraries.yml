@@ -20,6 +20,7 @@
       - mercurial
       - pkgconfig
       - zlib-devel
+      - lcms2-devel
 
 - name: remove package imagemagick
   sudo: yes

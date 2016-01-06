@@ -22,7 +22,7 @@
   unarchive: src={{ magick_path }}/{{ im_zip }} dest={{ magick_path }} copy=no
 
 - name: configure ImageMagick
-  shell: cd {{ im_dir }} && ./configure --prefix=/usr/local --with-modules=yes
+  shell: cd {{ im_dir }} && PKG_CONFIG_PATH=/usr/local/lib/pkgconfig ./configure --prefix=/usr/local --with-modules=yes
 
 - name: make ImageMagick
   shell: cd {{ im_dir }} && make 
