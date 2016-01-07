@@ -5,3 +5,4 @@ ec2_zone: us-east-1d
 ec2_instance_type: m3.medium
 # centos 7 64-bit
 ec2_image: ami-96a818fe
+ec2_opt_vol_size: 40
