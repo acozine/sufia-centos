@@ -9,9 +9,6 @@
       capistrano_keys:
           - https://github.com/acozine.keys
           - https://github.com/mark-dce.keys
-      install_user: ucsb
-      install_group: ucsb
-      become_user: ucsb
       install_path: /opt/install
       project_name: alex2
       rails_env: production
@@ -23,6 +20,13 @@
     - { role: ruby }
     - { role: hydra-stack }
     - { role: services }
+    #- { role: ffmpeg }
+    #- { role: imagemagick }
     - { role: passenger, sudo: yes }
     - { role: marmotta }
     - { role: app-config, sudo: yes }
+    - { role: ezid }
+    - { role: smtp }
+    - { role: ldap }
+    - { role: hostname }
+    - { role: deploy, repo: "https://github.com/curationexperts/alexandria-v2.git" }
