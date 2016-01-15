@@ -1,12 +1,12 @@
 ---
 JETTY_VERSION: 8.1.16.v20140903
+project_name: alex2
+marmotta_version: 3.3.0
+marmotta_sha: 34c37281b6875ea95da391ae5bbe059f31091f3c6bf2529539241b35690c84b0
+marmotta_home: /opt/marmotta
 marmotta_group: marmotta
 marmotta_user: marmotta
 marmotta_db: marmotta
 marmotta_pg_user: marmotta
 marmotta_pg_pass: abcmarmotta
 pg_pass: postgres
-install_path: /opt/install
-install_user: install
-install_group: install
-become_user: install
