@@ -3,7 +3,7 @@
 production:
   address: {{ smtp_address }}
   domain: {{ smtp_domain }}
-  port: {{ smpt_port }}
+  port: {{ smtp_port }}
   authentication: plain,
   enable_starttls_auto: true 
   user_name: <%= Rails.application.secrets.smtp_user %>
