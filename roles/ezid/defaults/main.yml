@@ -9,5 +9,4 @@ capistrano_group: deploy
 ezid_host: ezid.cdlib.org
 ezid_port: 443
 ezid_user: apitest
-ezid_password: apitest
 ezid_default_shoulder: ark:/99999/fk4
