@@ -1,4 +1,5 @@
 ---
 # roles/smtp/tasks/main.yml
 - name: add smtp shared config file
+  become: yes
   template: src=smtp.yml.j2 dest=/opt/{{ project_name }}/shared/config/smtp.yml owner={{ capistrano_user }} group={{ capistrano_group }} backup=no
