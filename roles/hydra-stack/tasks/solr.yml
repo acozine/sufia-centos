@@ -66,10 +66,10 @@
   sudo: yes
   file: src=/opt/solr/{{ solr_context }}.xml dest=/etc/tomcat/Catalina/localhost/{{ solr_context }}.xml state=link
 
-- name: symlink schema from code to solr
+- name: create schema file
   sudo: yes
-  file: src=/opt/{{ project_name }}/current/solr_conf/conf/schema.xml dest=/opt/solr/collection1/conf/schema.xml state=link force=yes
+  copy: src=schema.xml dest=/opt/solr/collection1/conf/schema.xml group=tomcat owner=tomcat backup=yes
 
-- name: symlink solrconfig from code to solr
+- name: create solrconfig file
   sudo: yes
-  file: src=/opt/{{ project_name }}/current/solr_conf/conf/solrconfig.xml dest=/opt/solr/collection1/conf/solrconfig.xml state=link force=yes
+  copy: src=solrconfig.xml dest=/opt/solr/collection1/conf/solrconfig.xml backup=yes
