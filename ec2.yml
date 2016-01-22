@@ -19,3 +19,4 @@
     - { role: passenger, sudo: yes }
     - { role: marmotta }
     - { role: app-config, sudo: yes }
+    - { role: sshd }

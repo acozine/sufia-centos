@@ -26,3 +26,4 @@
     - { role: services }
     - { role: passenger, sudo: yes }
     - { role: app-config, sudo: yes }
+    - { role: sshd }

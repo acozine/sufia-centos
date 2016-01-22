@@ -1,0 +1,7 @@
+---
+- name: update sshd config
+  copy: src=sshd_config dest=/etc/ssh/sshd_config backup=yes
+  notify:
+  - restart ssh service
+
+- meta: flush_handlers
