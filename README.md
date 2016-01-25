@@ -7,11 +7,8 @@ Before you can use this project, you must:
 1. clone this repo to your local workstation using: `git clone https://github.com/acozine/sufia-centos.git`  *NOTE: this script runs on your local system 
    and connects to the server you want to configure, do not try to run it on the server directly*
 2. install [Ansible](http://docs.ansible.com/intro_installation.html) on your local system.
-3. visit the [Oracle downloads page](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
-4. accept Oracle's License Agreement for Java 8
-5. download the Java SE Development Kit 8u51 as a tarball from Oracle - the one you want is `Linux x64      165.25 MB        jdk-8u51-linux-x64.tar.gz`
-6. place the file in roles/hydra-stack/files/jdk-8u51-linux-x64.tar.gz
-7. continue with the EC2, Vagrant, or SSH section depending on your server type
+3. continue with the EC2, Vagrant, or SSH section depending on your server type
+4. if the playbook fails, you can restart it with `ansible-playbook -i hosts vagr.yml --private-key=~/.ssh/sandbox.pem --start-at-task='deploy | clone repo'
 
 ## EC2
 
@@ -22,6 +19,7 @@ To create an ec2 instance:
 3. create a new vars/main.yml file in the services role  
 4. override any default variables you wish to change there (we definitely recommend overriding the postgresql database, user, and password settings)  
 5. run `ansible-playbook --private-key /path/to/your/keypair.pem ec2.yml` (if you encrypt your variables with ansible-vault, add `--ask-vault-pass`; if you are not using passwordless sudo, add `--ask-sudo-pass` or `-K`)  
+6. if the playbook fails, you can restart it at a particular task with `ansible-playbook --private-key /path/to/your/keypair.pem ec2.yml --start-at-task='rolename | taskname'`  
 
 ## Vagrant
 
@@ -32,8 +30,8 @@ To use this project with [Vagrant](http://docs.vagrantup.com/v2/):
 3. modify the Vagrantfile to use Ansible (see sample Vagrantfile for ideas)  
 4. be sure to point to the vagrant.yml file, which skips the launch_ec2 and ec2 roles
 5. clone this project as the `provisioning` sub-directory of your Vagrant project  
-6. run `vagrant up`
-
+6. run `vagrant up`  
+7. if the playbook fails, you can restart it at a particular tasks by uncommenting the line in your Vagrantfile that begins `ansible.start_at_task` and changing the value to the task name  
 
 ## Generic server running SSH
 
@@ -44,11 +42,12 @@ To run the Ansible provisioning scripts against a minimal Centos 7 server via ss
 3. these scripts assume that you have a separate virtual drive available for the application installation at dev/sdc (assuming sda is your main system drive and sdb is your swap drive).  
 3. edit the `hosts` file in this directory and replace the ip address for hydra-head with your server's IP
 4. edit the `vars:` section of the vanilla.yml file and enter data for your system - see the commented lines
-5. run `ansible-playbook vanilla.yml` from the root directory of this repo on your local machine
+5. run `ansible-playbook -i hosts vanilla.yml` from the root directory of this repo on your local machine
+6. if the playbook fails, you can restart it at a particular task with `ansible-playbook -i hosts vanilla.yml --start-at-task='rolename | taskname'`  
 
 ## Next Steps
 
-This project expects your code to be deployed with [Capistrano](http://capistranorb.com/). If your project doesn't already use 
+This project deploys your code to be deployed with [Capistrano](http://capistranorb.com/). If your project doesn't already use 
 Capistrano and have at least one deployment stage defined, that's a little beyond us here - go look at the Capistrano getting started 
 documentation and then come back here.
 
