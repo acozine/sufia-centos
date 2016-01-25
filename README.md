@@ -8,7 +8,6 @@ Before you can use this project, you must:
    and connects to the server you want to configure, do not try to run it on the server directly*
 2. install [Ansible](http://docs.ansible.com/intro_installation.html) on your local system.
 3. continue with the EC2, Vagrant, or SSH section depending on your server type
-4. if the playbook fails, you can restart it with `ansible-playbook -i hosts vagr.yml --private-key=~/.ssh/sandbox.pem --start-at-task='deploy | clone repo'
 
 ## EC2
 
