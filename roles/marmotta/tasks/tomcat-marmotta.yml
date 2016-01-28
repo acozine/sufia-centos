@@ -12,7 +12,7 @@
 
 - name: download marmotta
   get_url: url=http://mirror.cc.columbia.edu/pub/software/apache/marmotta/{{ marmotta_ver }}/apache-marmotta-{{ marmotta_ver }}-webapp.tar.gz \
-           sha256sum={{ marmotta_sha }} \
+           sha256sum={{ marmotta_256 }} \
            owner={{ ansible_ssh_user }} group={{ ansible_ssh_user }} \
            dest={{ install_path }}/apache-marmotta-{{ marmotta_ver }}-webapp.tar.gz
 

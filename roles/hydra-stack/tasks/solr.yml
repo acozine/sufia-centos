@@ -8,10 +8,12 @@
   file: src=/var/log/tomcat/velocity.log dest=/var/lib/tomcat/velocity.log state=link
 
 - name: download solr tarball
-  get_url: url=http://archive.apache.org/dist/lucene/solr/4.10.4/solr-4.10.4.tgz dest={{ install_path }}/solr-4.10.4.tgz force=no
+  get_url: url=http://archive.apache.org/dist/lucene/solr/{{ solr_ver }}/solr-{{ solr_ver }}.tgz \
+           dest={{ install_path }}/solr-{{ solr_ver }}.tgz \
+           force=no sha256sum={{ solr_256 }}
 
 - name: untar solr tarball
-  unarchive: src={{ install_path }}/solr-4.10.4.tgz dest={{ install_path }}/ creates={{ install_path }}/solr-4.10.4/bin/solr copy=no
+  unarchive: src={{ install_path }}/solr-{{ solr_ver }}.tgz dest={{ install_path }}/ creates={{ install_path }}/solr-{{ solr_ver }}/bin/solr copy=no
 
 - name: check solr dir
   stat: path=/opt/solr/lib
