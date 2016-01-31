@@ -4,3 +4,4 @@ solr_context: hydra
 base_path: prod
 capistrano_user: deploy
 capistrano_group: deploy
+fedora_version: 4.5.0
