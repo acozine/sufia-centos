@@ -1,5 +1,5 @@
 ## OVERVIEW
-This Ansible project was created by Data Curation Experts based on work for the Chemical Heritage Foundation, UC Santa Barbara, and Washington University in St. Louis. It builds a production-style Hydra application on CentOS 7 - on Amazon EC2, a Vagrant virtural machine, or a bare-bones server.
+This Ansible project was created by Data Curation Experts based on work for the Chemical Heritage Foundation, UC Santa Barbara, and Washington University in St. Louis. It builds a production-style Hydra application on CentOS 7 - on Amazon EC2, a Vagrant virtual machine, or a bare-bones server.
 
 ## Setup
 Before you can use this project, you must:
