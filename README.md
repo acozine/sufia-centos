@@ -7,13 +7,13 @@ Before you can use this project, you must:
 1. Clone this repo to your local workstation using: `git clone https://github.com/acozine/sufia-centos.git`  * NOTE: this script runs on your local system 
    and connects to the server you want to configure, do not try to run it on the server directly*
 1. Install [Ansible](http://docs.ansible.com/intro_installation.html) on your local system.
-1. Continue with the Amaxon EC2, Vagrant, or SSH section depending on your server type
+1. Continue with the Amazon EC2, Vagrant, or SSH section depending on your server type
 
 ## EC2
 
 To create an Amazon EC2 instance:
 
-1. create new vars/main.yml files in the `launch_ec2` and `ec2` roles  
+1. Create new vars/main.yml files in the `launch_ec2` and `ec2` roles  
 1. Add your organization's AWS credentials there
 1. Create a new `vars/main.yml` file in the services role  
 1. Override any default variables you wish to change there (we recommend overriding the postgresql database, user, and password settings)  
