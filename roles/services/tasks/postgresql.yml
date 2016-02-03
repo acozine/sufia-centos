@@ -3,7 +3,7 @@
 - name: enable epel repo
   sudo: yes
   yum: name=http://dl.fedoraproject.org/pub/epel/7/x86_64/e//epel-release-7-5.noarch.rpm state=present
-  
+
 - name: install psycopg2
   sudo: yes
   yum: name=python-psycopg2 update_cache=yes state=present
@@ -27,7 +27,7 @@
   - restart postgres server
   - create pg hydra user
   - create pg hydra database
-  
+
 - name: create pg_backups directory
   sudo: yes
   file: owner=postgres group=postgres state=directory path=/opt/pg_backups

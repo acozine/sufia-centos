@@ -2,12 +2,12 @@
 # ROLE: deploy
 # roles/deploy/tasks/main.yml 
 #
-# Does a minimal install of a codebase in devlopment mode to bootstrap a capistrano deployment
-
+# Does a minimal install of a codebase in development mode to bootstrap a capistrano deployment
+#
 - name: create deployment keypair for vagrant user
-  user: 
+  user:
       name: "{{ ansible_ssh_user }}"
-      generate_ssh_key: yes 
+      generate_ssh_key: yes
       ssh_key_file: .ssh/id_rsa
 
 - name: read public key
@@ -17,12 +17,12 @@
 
 - name: add public key to deploy user
   become: yes
-  authorized_key: 
-      user: "{{ capistrano_user }}" 
+  authorized_key:
+      user: "{{ capistrano_user }}"
       key: "{{ public_key.content | b64decode }}"
 
-- name: clone repo 
-  git: 
+- name: clone repo
+  git:
       repo: "{{ repo }}"
       dest: /home/{{ ansible_ssh_user }}/{{ project_name }}
 
@@ -35,6 +35,6 @@
 - name: restart tomcat and apache
   become: true
   service: name={{ item }} state=restarted
-  with_items: 
+  with_items:
     - tomcat
     - httpd

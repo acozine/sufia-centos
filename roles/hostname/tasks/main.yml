@@ -7,5 +7,3 @@
 - name: add shared config/environments/production.rb
   become: yes
   template: src=production.rb.j2 dest=/opt/{{ project_name }}/shared/config/environments/production.rb owner={{ capistrano_user }} group={{ capistrano_group }} backup=no
-
-      

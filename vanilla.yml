@@ -17,7 +17,7 @@
       hydra_pg_user: # user that owns hydra pg database
       hydra_pg_pass: # password for hydra_pg_user
       rails_secret_key_base: # run "rake secret" on a rails project, or use some other random string generator and paste result here
-  
+
   roles:
     - { role: generic-centos, sudo: yes }
     - { role: housekeeping, sudo: yes }

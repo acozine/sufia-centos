@@ -8,9 +8,9 @@ AllowEncodedSlashes NoDecode
 XSendFile on
 XSendFilePath /opt/{{ project_name }}/derivatives
   <Directory /opt/{{ project_name }}/current/public>
-        # MultiViews must be turned off.  
-        Options -MultiViews  
+        # MultiViews must be turned off.
+        Options -MultiViews
         # Uncomment this if you're on Apache >= 2.4:
         Require all granted
-  </Directory>  
+  </Directory>
 </VirtualHost>

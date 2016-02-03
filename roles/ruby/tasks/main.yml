@@ -5,14 +5,14 @@
 #  changed_when: false
 #  ignore_errors: yes # failure means our ruby version isn't installed yet
 #  always_run: yes
-
+#
 - name: remove package ruby
   sudo: yes
   yum: name=ruby state=absent
 
 - name: download ruby
   get_url: url=https://cache.ruby-lang.org/pub/ruby/2.2/ruby-2.2.3.tar.gz owner={{ ansible_ssh_user }} group={{ ansible_ssh_user }} dest={{ install_path }}/ruby-2.2.3.tar.gz
-  
+
 - name: unzip ruby file
   unarchive: src={{ install_path }}/ruby-2.2.3.tar.gz dest={{ install_path }}/ creates={{ install_path }}/ruby-2.2.3/compile.c copy=no
 
@@ -23,9 +23,9 @@
 
 - name: configure ruby
   shell: cd {{ install_path }}/ruby-2.2.3 && ./configure --enable-shared creates={{ install_path }}/ruby-2.2.3/Makefile
-  
+
 - name: make ruby
-  shell: cd {{ install_path }}/ruby-2.2.3 && make 
+  shell: cd {{ install_path }}/ruby-2.2.3 && make
   when: ruby.stat.exists == False
 
 - name: install ruby
@@ -37,7 +37,7 @@
   sudo: yes
   file: src=/usr/local/bin/ruby dest=/usr/bin/ruby state=link
 
-- name: symlink gem for root 
+- name: symlink gem for root
   sudo: yes
   file: src=/usr/local/bin/gem dest=/usr/bin/gem state=link
 
