@@ -1,8 +1,0 @@
----
-# roles/app-config/tasks/main.yml
-# alex2 project needs
-# ezid.yml (ezid role)
-# smtp.yml (smtp role)
-# fedora.yml (hydra-stack role)
-# ldap.yml (ldap role)
-# config/environments/production.rb (hostname role)
