@@ -33,7 +33,7 @@
   shell: cap internal_build deploy chdir=/home/{{ ansible_ssh_user }}/{{ project_name }}
 
 - name: restart tomcat and apache
-  become: true
+  become: yes
   service: name={{ item }} state=restarted
   with_items:
     - tomcat

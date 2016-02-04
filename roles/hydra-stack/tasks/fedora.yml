@@ -4,21 +4,21 @@
 
 - name: make fedora data dir
   file: owner=tomcat group=tomcat state=directory path=/opt/fedora-data
-  sudo: yes
+  become: yes
 
 - name: check fedora.war
   stat: path=/var/lib/tomcat/webapps/fedora.war
   register: fedora_war
 
 - name: copy over fedora.war
-  sudo: yes
+  become: yes
   command: cp {{ install_path }}/fcrepo-webapp-{{ fedora_version }}.war /var/lib/tomcat/webapps/fedora.war
   when: fedora_war.stat.exists == False
 
 - name: create tomcat config and java options
-  sudo: yes
+  become: yes
   template: src=tomcat.j2 dest=/etc/tomcat/tomcat.conf backup=yes
 
 - name: restart tomcat
-  sudo: yes
+  become: yes
   service: name=tomcat enabled=yes state=restarted

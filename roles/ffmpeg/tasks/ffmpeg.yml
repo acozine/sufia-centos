@@ -1,6 +1,6 @@
 ---
 - name: link media libraries built from source
-  sudo: yes
+  become: yes
   shell: /usr/sbin/ldconfig
 
 - name: clone ffmpeg source
@@ -13,13 +13,13 @@
   shell: cd {{ ffmpeg_path }}/ffmpeg && make 
 
 - name: install ffmpeg
-  sudo: yes
+  become: yes
   shell: cd {{ ffmpeg_path }}/ffmpeg && make install
 
 - name: clean the ffmpeg repo
-  sudo: yes
+  become: yes
   shell: cd {{ ffmpeg_path }}/ffmpeg && make distclean
 
 - name: link new ffmpeg
-  sudo: yes
+  become: yes
   shell: /usr/sbin/ldconfig

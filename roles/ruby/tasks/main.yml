@@ -7,7 +7,7 @@
 #  always_run: yes
 #
 - name: remove package ruby
-  sudo: yes
+  become: yes
   yum: name=ruby state=absent
 
 - name: download ruby
@@ -17,7 +17,7 @@
   unarchive: src={{ install_path }}/ruby-2.2.3.tar.gz dest={{ install_path }}/ creates={{ install_path }}/ruby-2.2.3/compile.c copy=no
 
 - name: check if ruby is installed
-  sudo: yes
+  become: yes
   stat: path=/usr/local/bin/ruby
   register: ruby
 
@@ -29,18 +29,18 @@
   when: ruby.stat.exists == False
 
 - name: install ruby
-  sudo: yes
+  become: yes
   shell: cd {{ install_path }}/ruby-2.2.3 && make install creates=/usr/local/bin/ruby
   when: ruby.stat.exists == False
 
 - name: symlink ruby for root
-  sudo: yes
+  become: yes
   file: src=/usr/local/bin/ruby dest=/usr/bin/ruby state=link
 
 - name: symlink gem for root
-  sudo: yes
+  become: yes
   file: src=/usr/local/bin/gem dest=/usr/bin/gem state=link
 
 - name: install bundler
-  sudo: yes
+  become: yes
   gem: name=bundler user_install=no state=present

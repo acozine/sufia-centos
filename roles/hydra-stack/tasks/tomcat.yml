@@ -1,6 +1,6 @@
 ---
 - name: install tomcat packages
-  sudo: yes
+  become: yes
   yum: name={{ item }} state=present
   with_items:
       - tomcat
@@ -8,5 +8,5 @@
       - tomcat-admin-webapps
 
 - name: set tomcat to restart on reboot
-  sudo: yes
+  become: yes
   service: name=tomcat enabled=yes

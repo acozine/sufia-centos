@@ -1,11 +1,11 @@
 ---
 - name: create marmotta group
   group: name={{ marmotta_group }} state=present
-  sudo: yes
+  become: yes
 
 - name: create marmotta user
   user: name={{ marmotta_user }} group={{ marmotta_group }} shell=/bin/bash home=/opt/marmotta createhome=yes state=present
-  sudo: yes
+  become: yes
 
 - name: create marmotta_home
   file: path={{ marmotta_home }} state=directory

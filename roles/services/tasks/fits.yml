@@ -1,6 +1,6 @@
 ---
 - name: install zip utility
-  sudo: yes
+  become: yes
   yum: name=unzip state=present
 
 - name: download fits zip
@@ -10,13 +10,13 @@
   unarchive: src={{ install_path }}/fits-{{ fits_version }}.zip dest={{ install_path }}/ creates={{ install_path }}/fits-{{ fits_version }}/fits.sh copy=no
 
 - name: make fits executable
-  sudo: yes
+  become: yes
   file: path={{ install_path }}/fits-{{ fits_version }}/fits.sh mode=0755
 
 - name: copy fits
-  sudo: yes
+  become: yes
   shell: cp -r {{ install_path }}/fits-{{ fits_version }}/* /usr/local/bin/
 
 - name: symlink fits
-  sudo: yes
+  become: yes
   file: src=/usr/local/bin/fits.sh dest=/usr/local/bin/fits state=link

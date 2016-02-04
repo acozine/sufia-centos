@@ -3,7 +3,7 @@
 # to integrate, we should be able to use the distro-neutral package approach
 # with Ansible 2.0
 - name: install IM libraries
-  sudo: yes
+  become: yes
   yum: name={{ item }} state=present
   with_items:
       - fontconfig-devel
@@ -23,13 +23,13 @@
       - lcms2-devel
 
 - name: remove package imagemagick
-  sudo: yes
+  become: yes
   yum: name=imagemagick state=absent
 
 - name: create IM sources dir
-  sudo: yes
+  become: yes
   file: owner={{ ansible_ssh_user }} group={{ ansible_ssh_user }} state=directory path={{ magick_path }}
 
 - name: IM add ldconfig for /usr/local/lib
-  sudo: yes
+  become: yes
   copy: dest=/etc/ld.so.conf.d/usr-local.conf content=/usr/local/lib owner=root group=root mode=0644 

@@ -1,16 +1,16 @@
 ---
 # installs database, dev library, and python psql adapter
 - name: enable epel repo
-  sudo: yes
+  become: yes
   yum: name=http://dl.fedoraproject.org/pub/epel/7/x86_64/e//epel-release-7-5.noarch.rpm state=present
 
 - name: install psycopg2
-  sudo: yes
+  become: yes
   yum: name=python-psycopg2 update_cache=yes state=present
 
 - name: install postgresql packages
   yum: name={{ item }} state=present
-  sudo: yes
+  become: yes
   with_items:
   - postgresql
   - postgresql-devel
@@ -29,19 +29,19 @@
   - create pg hydra database
 
 - name: create pg_backups directory
-  sudo: yes
+  become: yes
   file: owner=postgres group=postgres state=directory path=/opt/pg_backups
 
 - name: add pg_backups script
-  sudo: yes
+  become: yes
   template: src=pg_backups.j2 dest=/opt/pg_backups/pg_daily_double owner=root group=root mode=0755
 
 - name: add pg_backups cron job
-  sudo: yes
+  become: yes
   cron: name="backup pg db" user=postgres job="/opt/pg_backups/pg_daily_double" minute="0" hour="1" state=present
 
 - meta: flush_handlers
 
 - name: set postgres to restart on reboot
-  sudo: yes
+  become: yes
   service: name=postgresql enabled=yes

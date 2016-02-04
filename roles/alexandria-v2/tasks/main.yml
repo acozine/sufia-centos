@@ -5,5 +5,5 @@
 # the marmotta host, and the ETD download_root directory
 # in the application.yml file
 - name: customize application.yml 
-  sudo: yes
+  become: yes
   template: src=application.yml.j2 dest=/opt/{{ project_name }}/shared/config/application.yml group={{ capistrano_group }} owner={{ capistrano_user }} backup=no

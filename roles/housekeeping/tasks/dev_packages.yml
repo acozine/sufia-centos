@@ -1,8 +1,10 @@
 ---
 - name: update all yum packages
+  become: yes
   yum: name=* state=latest
 
 - name: install dev tools and libraries
+  become: yes
   yum: name={{ item}} state=present
   with_items:
     # Development Tools group - manual install would be:

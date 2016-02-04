@@ -1,11 +1,11 @@
 ---
 - name: create marmotta group
   group: name={{ marmotta_group }} state=present
-  sudo: yes
+  become: yes
 
 - name: create marmotta user
   user: name={{ marmotta_user }} group={{ marmotta_group }} shell=/bin/bash home=/opt/marmotta createhome=yes state=present
-  sudo: yes
+  become: yes
 
 - name: download jetty
   become: yes
@@ -29,15 +29,15 @@
 
 - name: copy marmotta
   command: cp {{ install_path }}/apache-marmotta-3.3.0/marmotta.war /opt/jetty8/webapps/marmotta.war
-  sudo: yes
+  become: yes
 
 - name: set default variables for jetty
   copy: src=jetty_default dest=/etc/default/jetty
-  sudo: yes
+  become: yes
 
 - name: copy marmotta config files
   copy: src={{ item }} dest=/opt/jetty8/etc/{{ item }}
-  sudo: yes
+  become: yes
   with_items:
     - jetty.xml
     - jetty-plus.xml
@@ -46,33 +46,33 @@
 
 - name: set marmotta system config properties
   template: src=system-config.properties.j2 dest=/opt/marmotta/system-config.properties backup=yes
-  sudo: yes
+  become: yes
 
 - name: create jetty init script
   file: src=/opt/jetty8/bin/jetty.sh dest=/etc/rc.d/init.d/jetty state=link
-  sudo: yes
+  become: yes
 
 - name: copy marmotta file for jetty
   copy: src=marmotta-config.xml dest=/opt/jetty8/contexts-available/marmotta.xml
-  sudo: yes
+  become: yes
 
 - name: symlink marmotta file to jetty
   file: src=/opt/jetty8/contexts-available/marmotta.xml dest=/opt/jetty8/contexts/marmotta.xml state=link
-  sudo: yes
+  become: yes
 
 - name: set permissions for marmotta directory
   file: path=/opt/marmotta owner={{ marmotta_user }} group={{ marmotta_group }} mode=0755 state=directory recurse=yes
-  sudo: yes
+  become: yes
 
 - name: create logs directory
   file: dest=/opt/marmotta/logs owner={{ marmotta_user }} group={{ marmotta_group }} mode=0755 state=directory
-  sudo: yes
+  become: yes
 
 - name: set permissions for jetty directory
   file: path=/opt/jetty8 owner={{ marmotta_user }} group={{ marmotta_group }} state=directory recurse=yes
-  sudo: yes
+  become: yes
 
 - name: start jetty and marmotta
   service: name=jetty state=restarted
-  sudo: yes
+  become: yes
 # check the Marmotta admin page at http://host_name:8180/marmotta/

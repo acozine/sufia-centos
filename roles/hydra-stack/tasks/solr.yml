@@ -1,10 +1,10 @@
 ---
 - name: create velocity log
-  sudo: yes
+  become: yes
   file: path=/var/log/tomcat/velocity.log state=touch owner=tomcat group=tomcat mode=0644
 
 - name: symlink velocity log
-  sudo: yes
+  become: yes
   file: src=/var/log/tomcat/velocity.log dest=/var/lib/tomcat/velocity.log state=link
 
 - name: download solr tarball
@@ -19,57 +19,57 @@
 
 - name: make solr lib dir
   file: owner=tomcat group=tomcat state=directory path=/opt/solr/lib
-  sudo: yes
+  become: yes
   when: solr_dir.stat.exists == False
 
 - name: copy over war file
-  sudo: yes
+  become: yes
   command: cp {{ install_path }}/solr-4.10.4/dist/solr-4.10.4.war /opt/solr/
 
 - name: copy over dist dir
-  sudo: yes
+  become: yes
   shell: cp -r {{ install_path }}/solr-4.10.4/dist /opt/solr/lib/
 
 - name: copy over contrib dir
-  sudo: yes
+  become: yes
   command: cp -r {{ install_path }}/solr-4.10.4/contrib /opt/solr/lib/
 
 - name: copy over example collection
-  sudo: yes
+  become: yes
   command: cp -r --remove-destination {{ install_path }}/solr-4.10.4/example/solr/collection1 /opt/solr/
 
 - name: copy logging jars
-  sudo: yes
+  become: yes
   shell: cp {{ install_path }}/solr-4.10.4/example/lib/ext/*.jar /usr/share/tomcat/lib/
 
 - name: copy solr-cell jar for text extraction
-  sudo: yes
+  become: yes
   shell: cp {{ install_path }}/solr-4.10.4/dist/solr-cell-4.10.4.jar /opt/solr/lib/contrib/extraction/lib/
 
 - name: set ownership and group for solr
-  sudo: yes
+  become: yes
   shell: chown -R tomcat:tomcat /opt/solr
 
 - name: copy log4j properties file
-  sudo: yes
+  become: yes
   shell: cp {{ install_path }}/solr-4.10.4/example/resources/log4j.properties /usr/share/java/tomcat/
 
 - name: set ownership and group for tomcat
-  sudo: yes
+  become: yes
   shell: chown -R tomcat:tomcat /usr/share/tomcat
 
 - name: create solr xml file
-  sudo: yes
+  become: yes
   template: src=hydra_xml.j2 dest=/opt/solr/{{ solr_context }}.xml group=tomcat owner=tomcat
 
 - name: symlink solr xml file to tomcat
-  sudo: yes
+  become: yes
   file: src=/opt/solr/{{ solr_context }}.xml dest=/etc/tomcat/Catalina/localhost/{{ solr_context }}.xml state=link
 
 - name: create schema file
-  sudo: yes
+  become: yes
   copy: src=schema.xml dest=/opt/solr/collection1/conf/schema.xml group=tomcat owner=tomcat backup=yes
 
 - name: create solrconfig file
-  sudo: yes
+  become: yes
   copy: src=solrconfig.xml dest=/opt/solr/collection1/conf/solrconfig.xml backup=yes
