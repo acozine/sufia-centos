@@ -9,7 +9,7 @@
 
 - name: download jetty
   become: yes
-  get_url: url=http://archive.eclipse.org/jetty/{{ JETTY_VERSION }}/dist/jetty-distribution-{{ JETTY_VERSION }}.tar.gz owner={{ install_user }} group={{ install_group }} dest={{ install_path }}/jetty-distribution-{{ JETTY_VERSION }}.tar.gz
+  get_url: url=http://archive.eclipse.org/jetty/{{ jetty_ver }}/dist/jetty-distribution-{{ jetty_ver }}.tar.gz owner={{ install_user }} group={{ install_group }} dest={{ install_path }}/jetty-distribution-{{ jetty_ver }}.tar.gz
 
 - name: untar jetty
   become: yes

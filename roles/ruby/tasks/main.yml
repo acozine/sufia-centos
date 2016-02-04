@@ -1,6 +1,6 @@
 ---
-#- name: check ruby {{ ruby_version }} installed
-#  shell: "ruby -v | grep {{ ruby_version }}"
+#- name: check ruby {{ ruby_ver }} installed
+#  shell: "ruby -v | grep {{ ruby_ver }}"
 #  register: ruby_installed
 #  changed_when: false
 #  ignore_errors: yes # failure means our ruby version isn't installed yet
