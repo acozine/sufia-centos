@@ -1,9 +1,6 @@
 ---
 # roles/alexandria-v2/tasks/main.yml
 #
-# specify locations for the minter-state file,
-# the marmotta host, and the ETD download_root directory
-# in the application.yml file
-- name: customize application.yml 
-  become: yes
-  template: src=application.yml.j2 dest=/opt/{{ project_name }}/shared/config/application.yml group={{ capistrano_group }} owner={{ capistrano_user }} backup=no
+- include: adrl-dm.yml
+- include: automount.yml
+- include: config.yml

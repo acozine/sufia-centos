@@ -1,0 +1,20 @@
+---
+- name: install automount
+  yum: name={{ item }} state=present
+  with_items:
+    - autofs
+    - cifs-utils
+    - samba-client
+    - samba-common
+
+- name: create new auto.master
+  copy: src=auto.master dest=/etc/auto.master owner={{ ansible_ssh_user }} group={{ ansible_ssh_user }} mode=600
+
+- name: write mount configuration
+  template: src=auto.svm.j2 dest=/etc/auto.svm owner={{ ansible_ssh_user }} group={{ ansible_ssh_user }} mode=600
+
+- name: create mount point
+  file: path=/opt/ingest state=directory owner={{ ansible_ssh_user }} group={{ ansible_ssh_user }} mode=755
+
+- name: restart automount
+  service: name=autofs state=restarted enabled=yes

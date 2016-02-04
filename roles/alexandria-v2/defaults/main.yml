@@ -1,8 +1,7 @@
 ---
 # roles/alexandria-v2/defaults/main.yml
-project_name: sufia-project
+project_name: alexandria-v2
 capistrano_user: deploy
 capistrano_group: deploy
 minter_state_location: /opt/{{ project_name }}/shared/minter-state
 etd_download_root: /opt/download_root
-marmotta_host: localhost:8080
