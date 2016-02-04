@@ -11,18 +11,18 @@
   file: path={{ marmotta_home }} state=directory
 
 - name: download marmotta
-  get_url: url=http://mirror.cc.columbia.edu/pub/software/apache/marmotta/{{ marmotta_version }}/apache-marmotta-{{ marmotta_version }}-webapp.tar.gz \
+  get_url: url=http://mirror.cc.columbia.edu/pub/software/apache/marmotta/{{ marmotta_ver }}/apache-marmotta-{{ marmotta_ver }}-webapp.tar.gz \
            sha256sum={{ marmotta_sha }} \
            owner={{ ansible_ssh_user }} group={{ ansible_ssh_user }} \
-           dest={{ install_path }}/apache-marmotta-{{ marmotta_version }}-webapp.tar.gz
+           dest={{ install_path }}/apache-marmotta-{{ marmotta_ver }}-webapp.tar.gz
 
 - name: unpack marmotta
-  unarchive: src={{ install_path }}/apache-marmotta-{{ marmotta_version }}-webapp.tar.gz dest={{ install_path }}/ \
-             creates={{ install_path }}/apache-marmotta-{{ marmotta_version }}/marmotta.war copy=no
+  unarchive: src={{ install_path }}/apache-marmotta-{{ marmotta_ver }}-webapp.tar.gz dest={{ install_path }}/ \
+             creates={{ install_path }}/apache-marmotta-{{ marmotta_ver }}/marmotta.war copy=no
 
 - name: install marmotta
   become: yes
-  command: cp {{ install_path }}/apache-marmotta-{{ marmotta_version }}/marmotta.war /var/lib/tomcat/webapps/marmotta.war \
+  command: cp {{ install_path }}/apache-marmotta-{{ marmotta_ver }}/marmotta.war /var/lib/tomcat/webapps/marmotta.war \
            creates=/var/lib/tomcat/webapps/marmotta.war
 
 - name: set ownership on marmotta.war
