@@ -11,10 +11,10 @@
   yum: name=ruby state=absent
 
 - name: download ruby
-  get_url: url=https://cache.ruby-lang.org/pub/ruby/2.2/ruby-2.2.3.tar.gz owner={{ ansible_ssh_user }} group={{ ansible_ssh_user }} dest={{ install_path }}/ruby-2.2.3.tar.gz
+  get_url: url=https://cache.ruby-lang.org/pub/ruby/{{ ruby_abi }}/ruby-{{ ruby_ver }}.tar.gz owner={{ ansible_ssh_user }} group={{ ansible_ssh_user }} dest={{ install_path }}/ruby-{{ ruby_ver }}.tar.gz
 
 - name: unzip ruby file
-  unarchive: src={{ install_path }}/ruby-2.2.3.tar.gz dest={{ install_path }}/ creates={{ install_path }}/ruby-2.2.3/compile.c copy=no
+  unarchive: src={{ install_path }}/ruby-{{ ruby_ver }}.tar.gz dest={{ install_path }}/ creates={{ install_path }}/ruby-{{ ruby_ver }}/compile.c copy=no
 
 - name: check if ruby is installed
   become: yes
@@ -22,15 +22,15 @@
   register: ruby
 
 - name: configure ruby
-  shell: cd {{ install_path }}/ruby-2.2.3 && ./configure --enable-shared creates={{ install_path }}/ruby-2.2.3/Makefile
+  shell: cd {{ install_path }}/ruby-{{ ruby_ver }} && ./configure --enable-shared creates={{ install_path }}/ruby-{{ ruby_ver }}/Makefile
 
 - name: make ruby
-  shell: cd {{ install_path }}/ruby-2.2.3 && make
+  shell: cd {{ install_path }}/ruby-{{ ruby_ver }} && make
   when: ruby.stat.exists == False
 
 - name: install ruby
   become: yes
-  shell: cd {{ install_path }}/ruby-2.2.3 && make install creates=/usr/local/bin/ruby
+  shell: cd {{ install_path }}/ruby-{{ ruby_ver }} && make install creates=/usr/local/bin/ruby
   when: ruby.stat.exists == False
 
 - name: symlink ruby for root
