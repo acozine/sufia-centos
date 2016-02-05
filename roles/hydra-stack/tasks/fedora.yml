@@ -1,6 +1,9 @@
 ---
 - name: download fedora
-  get_url: url=http://repo1.maven.org/maven2/org/fcrepo/fcrepo-webapp/{{ fedora_ver }}/fcrepo-webapp-{{ fedora_ver }}.war owner={{ ansible_ssh_user }} group={{ ansible_ssh_user }} dest={{ install_path }}/fcrepo-webapp-{{ fedora_ver }}.war
+  get_url: url=https://repo1.maven.org/maven2/org/fcrepo/fcrepo-webapp/{{ fedora_ver }}/fcrepo-webapp-{{ fedora_ver }}.war \
+           owner={{ ansible_ssh_user }} group={{ ansible_ssh_user }} \
+           sha256sum={{ fedora_256 }} \
+           dest={{ install_path }}/fcrepo-webapp-{{ fedora_ver }}.war
 
 - name: make fedora data dir
   file: owner=tomcat group=tomcat state=directory path=/opt/fedora-data
