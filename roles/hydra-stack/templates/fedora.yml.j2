@@ -1,5 +1,16 @@
-production:
+default: &default
   user: fedoraAdmin
   password: fedoraAdmin
   url: http://127.0.0.1:8080/fedora/rest
   base_path: /{{ base_path }}
+
+development:
+  <<: *default
+
+test:
+  <<: *default
+  url: http://127.0.0.1:8983/fedora/rest
+
+production:
+  <<: *default
+  password: <%= Rails.application.secrets.fedora_pass %>
