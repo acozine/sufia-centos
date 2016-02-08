@@ -1,5 +1,4 @@
 ---
-jetty_ver: 8.1.16.v20140903
 project_name: alex2
 
 tomcat: /usr/share/tomcat
