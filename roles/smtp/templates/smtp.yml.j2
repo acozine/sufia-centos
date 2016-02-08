@@ -1,11 +1,17 @@
-# This config file was created by Ansible
-#
-production:
+defaults: &default
   address: {{ smtp_address }}
   domain: {{ smtp_domain }}
   port: {{ smtp_port }}
   authentication: plain,
-  enable_starttls_auto: true 
+  enable_starttls_auto: true
   user_name: <%= Rails.application.secrets.smtp_user %>
   password: <%= Rails.application.secrets.smtp_password %>
 
+development:
+  <<: *default
+
+test:
+  <<: *default
+
+production:
+  <<: *default
