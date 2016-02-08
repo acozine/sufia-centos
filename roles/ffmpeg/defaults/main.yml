@@ -1,2 +1,3 @@
 ---
 ffmpeg_path: "{{ install_path }}/ffmpeg_sources"
+x264_commit: a0cd7d38acb6c31973228ab207e18344920e0aa3
