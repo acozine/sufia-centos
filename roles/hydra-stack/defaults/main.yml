@@ -5,7 +5,7 @@ capistrano_user: deploy
 capistrano_group: deploy
 
 fedora_ver: 4.5.0
-fedora_256: b9781a38227b71bb2f61d09938f15d5621d57edcfb94db5e9524abcac6984b14
+fedora_256: f9c778c4285dcbb7ab228f43e5e30ea7511a5553ca52a34e274e1e390cb5187e
 
 solr_ver: 4.10.4
 solr_256: ac3543880f1b591bcaa962d7508b528d7b42e2b5548386197940b704629ae851
