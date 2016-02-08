@@ -1,17 +1,23 @@
 ---
 - name: clone libvpx source
-  git: repo=https://chromium.googlesource.com/webm/libvpx.git depth=1 dest={{ ffmpeg_path }}/libvpx force=yes
+  git: repo=https://chromium.googlesource.com/webm/libvpx.git \
+       depth=1 dest={{ ffmpeg_path }}/libvpx force=yes
 
 - name: configure libvpx
-  shell: cd {{ ffmpeg_path }}/libvpx && ./configure --disable-examples creates={{ ffmpeg_path }}/libvpx/Makefile
+  command: ./configure --disable-examples --prefix=/usr/local \
+           chdir={{ ffmpeg_path }}/libvpx \
+           creates={{ ffmpeg_path }}/libvpx/Makefile
 
 - name: make libvpx
-  shell: cd {{ ffmpeg_path }}/libvpx && make 
+  command: make \
+           chdir={{ ffmpeg_path }}/libvpx
 
 - name: install libvpx
   become: yes
-  shell: cd {{ ffmpeg_path }}/libvpx && make install
+  command: make install \
+           chdir={{ ffmpeg_path }}/libvpx
 
 - name: clean the libvpx repo
   become: yes
-  shell: cd {{ ffmpeg_path }}/libvpx && make distclean
+  command: make distclean \
+           chdir={{ ffmpeg_path }}/libvpx
