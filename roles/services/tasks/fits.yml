@@ -15,10 +15,17 @@
   become: yes
   file: path={{ install_path }}/fits-{{ fits_ver }}/fits.sh mode=0755
 
+- name: add version to fits wrapper
+  become: yes
+  command: mv fits.sh fits-{{ fits_ver }}.sh \
+           chdir={{ install_path }}/fits-{{ fits_ver }}
+
 - name: copy fits
   become: yes
-  shell: cp -r {{ install_path }}/fits-{{ fits_ver }}/* /usr/local/bin/
+  shell: cp -r {{ install_path }}/fits-{{ fits_ver }}/* /usr/local/bin/ \
+         creates=/usr/local/bin/fits-{{ fits_ver }}.sh
 
 - name: symlink fits
   become: yes
-  file: src=/usr/local/bin/fits.sh dest=/usr/local/bin/fits state=link
+  file: src=/usr/local/bin/fits-{{ fits_ver }}.sh dest=/usr/local/bin/fits \
+        state=link force=yes
