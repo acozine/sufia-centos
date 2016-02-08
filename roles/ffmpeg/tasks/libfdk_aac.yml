@@ -1,20 +1,27 @@
 ---
 - name: clone fdk-aac source
-  git: repo=git://git.code.sf.net/p/opencore-amr/fdk-aac depth=1 accept_hostkey=yes dest={{ ffmpeg_path }}/fdk-aac force=yes
+  git: repo=http://git.code.sf.net/p/opencore-amr/fdk-aac \
+       depth=1 accept_hostkey=yes dest={{ ffmpeg_path }}/fdk-aac force=yes
 
-- name: clean the fdk-aac repo
-  shell: cd {{ ffmpeg_path }}/fdk-aac && autoreconf -fiv
+- name: generate the configure script
+  command: ./autogen.sh
+           chdir={{ ffmpeg_path }}/fdk-aac
 
 - name: configure fdk-aac
-  shell: cd {{ ffmpeg_path }}/fdk-aac && ./configure --disable-shared creates={{ ffmpeg_path }}/fdk-aac/Makefile
+  command: ./configure --disable-shared --prefix=/usr/local \
+           chdir={{ ffmpeg_path }}/fdk-aac
+           creates={{ ffmpeg_path }}/fdk-aac/Makefile
 
 - name: make fdk-aac
-  shell: cd {{ ffmpeg_path }}/fdk-aac && make 
+  command: make \
+           chdir={{ ffmpeg_path }}/fdk-aac
 
 - name: install fdk-aac
   become: yes
-  shell: cd {{ ffmpeg_path }}/fdk-aac && make install
+  command: make install \
+           chdir={{ ffmpeg_path }}/fdk-aac
 
 - name: clean the fkd-aac repo
   become: yes
-  shell: cd {{ ffmpeg_path }}/fdk-aac && make distclean
+  command: make distclean \
+           chdir={{ ffmpeg_path }}/fdk-aac
