@@ -40,6 +40,7 @@
             owner=tomcat group=tomcat backup=no mode=0600
 
 - name: restart tomcat
+  become: yes
   service: name=tomcat enabled=yes state=restarted
 
 - wait_for: path={{ tomcat }}/webapps/marmotta/WEB-INF/lib/log4j-over-slf4j-1.7.7.jar
@@ -59,6 +60,7 @@
 
 # Otherwise subsequent runs will hang on the "wait_for" above
 - file: path={{ tomcat }}/webapps/marmotta/WEB-INF/lib/log4j-over-slf4j-1.7.7.jar state=touch
+  become: yes
 
 - name: restart tomcat
   become: yes
