@@ -6,7 +6,7 @@
 - name: download fits zip
   get_url: url={{ fits_url }} sha256sum={{ fits_256 }} \
            owner={{ ansible_ssh_user }} group={{ ansible_ssh_user }} \
-           dest={{ install_path }}/fits-{{ fits_version }}.zip
+           dest={{ install_path }}/fits-{{ fits_ver }}.zip
 
 - name: unpack fits
   unarchive: src={{ install_path }}/fits-{{ fits_ver }}.zip dest={{ install_path }}/ creates={{ install_path }}/fits-{{ fits_ver }}/fits.sh copy=no
