@@ -10,12 +10,12 @@
   become: yes
 
 - name: check fedora.war
-  stat: path=/var/lib/tomcat/webapps/fedora.war
+  stat: path={{ tomcat }}/webapps/fedora.war
   register: fedora_war
 
 - name: copy over fedora.war
   become: yes
-  command: cp {{ install_path }}/fcrepo-webapp-{{ fedora_ver }}.war /var/lib/tomcat/webapps/fedora.war
+  command: cp {{ install_path }}/fcrepo-webapp-{{ fedora_ver }}.war {{ tomcat }}/webapps/fedora.war
   when: fedora_war.stat.exists == False
 
 - name: create tomcat config and java options

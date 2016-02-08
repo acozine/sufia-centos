@@ -16,62 +16,63 @@
   unarchive: src={{ install_path }}/solr-{{ solr_ver }}.tgz dest={{ install_path }}/ creates={{ install_path }}/solr-{{ solr_ver }}/bin/solr copy=no
 
 - name: check solr dir
-  stat: path=/opt/solr/lib
+  stat: path={{ solr_home }}/lib
   register: solr_dir
 
 - name: make solr lib dir
-  file: owner=tomcat group=tomcat state=directory path=/opt/solr/lib
   become: yes
+  file: owner=tomcat group=tomcat state=directory path={{ solr_home }}/lib
   when: solr_dir.stat.exists == False
 
 - name: copy over war file
   become: yes
-  command: cp {{ install_path }}/solr-4.10.4/dist/solr-4.10.4.war /opt/solr/
+  command: cp {{ install_path }}/solr-{{ solr_ver }}/dist/solr-{{ solr_ver }}.war {{ solr_home }}/
 
 - name: copy over dist dir
   become: yes
-  shell: cp -r {{ install_path }}/solr-4.10.4/dist /opt/solr/lib/
+  shell: cp -r {{ install_path }}/solr-{{ solr_ver }}/dist {{ solr_home }}/lib/
 
 - name: copy over contrib dir
   become: yes
-  command: cp -r {{ install_path }}/solr-4.10.4/contrib /opt/solr/lib/
+  command: cp -r {{ install_path }}/solr-{{ solr_ver }}/contrib {{ solr_home }}/lib/
 
 - name: copy over example collection
   become: yes
-  command: cp -r --remove-destination {{ install_path }}/solr-4.10.4/example/solr/collection1 /opt/solr/
+  command: cp -r --remove-destination {{ install_path }}/solr-{{ solr_ver }}/example/solr/collection1 {{ solr_home }}/
 
 - name: copy logging jars
   become: yes
-  shell: cp {{ install_path }}/solr-4.10.4/example/lib/ext/*.jar /usr/share/tomcat/lib/
+  shell: cp {{ install_path }}/solr-{{ solr_ver }}/example/lib/ext/*.jar {{ tomcat }}/lib/
 
 - name: copy solr-cell jar for text extraction
   become: yes
-  shell: cp {{ install_path }}/solr-4.10.4/dist/solr-cell-4.10.4.jar /opt/solr/lib/contrib/extraction/lib/
+  shell: cp {{ install_path }}/solr-{{ solr_ver }}/dist/solr-cell-{{ solr_ver }}.jar {{ solr_home }}/lib/contrib/extraction/lib/
 
 - name: set ownership and group for solr
   become: yes
-  shell: chown -R tomcat:tomcat /opt/solr
+  shell: chown -R tomcat:tomcat {{ solr_home }}
 
 - name: copy log4j properties file
   become: yes
-  shell: cp {{ install_path }}/solr-4.10.4/example/resources/log4j.properties /usr/share/java/tomcat/
+  shell: cp {{ install_path }}/solr-{{ solr_ver }}/example/resources/log4j.properties {{ tomcat }}/
 
-- name: set ownership and group for tomcat
+- name: set ownership and group for {{ tomcat }}
   become: yes
-  shell: chown -R tomcat:tomcat /usr/share/tomcat
+  file: path={{ tomcat }} state=directory recurse=yes \
+        owner=tomcat group=tomcat
 
 - name: create solr xml file
   become: yes
-  template: src=hydra_xml.j2 dest=/opt/solr/{{ solr_context }}.xml group=tomcat owner=tomcat
+  template: src=hydra.xml.j2 dest={{ solr_home }}/{{ solr_context }}.xml group=tomcat owner=tomcat
 
 - name: symlink solr xml file to tomcat
   become: yes
-  file: src=/opt/solr/{{ solr_context }}.xml dest=/etc/tomcat/Catalina/localhost/{{ solr_context }}.xml state=link
+  file: src={{ solr_home }}/{{ solr_context }}.xml dest=/etc/tomcat/Catalina/localhost/{{ solr_context }}.xml state=link
 
 - name: create schema file
   become: yes
-  copy: src=schema.xml dest=/opt/solr/collection1/conf/schema.xml group=tomcat owner=tomcat backup=yes
+  copy: src=schema.xml dest={{ solr_home }}/collection1/conf/schema.xml group=tomcat owner=tomcat backup=yes
 
 - name: create solrconfig file
   become: yes
-  copy: src=solrconfig.xml dest=/opt/solr/collection1/conf/solrconfig.xml backup=yes
+  copy: src=solrconfig.xml dest={{ solr_home }}/collection1/conf/solrconfig.xml backup=yes

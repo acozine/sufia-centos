@@ -9,7 +9,7 @@ TOMCATS_BASE="/var/lib/tomcats/"
 JAVA_HOME="/usr/lib/jvm/jre"
 
 # Where your tomcat installation lives
-CATALINA_HOME="/usr/share/tomcat"
+CATALINA_HOME={{ tomcat }}
 
 # System-wide tmp
 CATALINA_TMPDIR="/var/cache/tomcat/temp"
@@ -21,5 +21,6 @@ CATALINA_TMPDIR="/var/cache/tomcat/temp"
 SECURITY_MANAGER="false"
 
 # tomcat settings for hydra (Fedora and Solr 4.x)
-JAVA_OPTS="-Dfcrepo.home=/opt/fedora-data -Djava.awt.headless=true -XX:+UseG1GC -XX:+UseCompressedOops -XX:-UseLargePagesIndividualAllocation -XX:MaxPermSize=128M -Xms512m -Xmx4096m -Djava.util.logging.config.file=/usr/share/java/tomcat/log4j.properties -server"
+CATALINA_OPTS="-Dfcrepo.home=/opt/fedora-data -Djava.awt.headless=true -XX:+UseG1GC -XX:+UseCompressedOops -XX:-UseLargePagesIndividualAllocation -XX:MaxPermSize=128M -Xms512m -Xmx4096m -Djava.util.logging.config.file={{ tomcat }}/log4j.properties -server"
 
+MARMOTTA_HOME={{ marmotta_home }}

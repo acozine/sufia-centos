@@ -1,6 +1,5 @@
 ---
 install_path: /opt/install
-solr_context: hydra
 base_path: prod
 capistrano_user: deploy
 capistrano_group: deploy
@@ -10,3 +9,7 @@ fedora_256: b9781a38227b71bb2f61d09938f15d5621d57edcfb94db5e9524abcac6984b14
 
 solr_ver: 4.10.4
 solr_256: ac3543880f1b591bcaa962d7508b528d7b42e2b5548386197940b704629ae851
+
+solr_context: hydra
+solr_home: /opt/solr
+tomcat: /usr/share/tomcat
