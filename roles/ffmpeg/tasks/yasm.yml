@@ -7,21 +7,23 @@
   debug: var=user
 
 - name: clone yasm source
-  git: repo=https://github.com/yasm/yasm.git depth=1 accept_hostkey=yes dest={{ ffmpeg_path }}/yasm force=yes
+  git: repo=https://github.com/yasm/yasm.git \
+       depth=1 dest={{ ffmpeg_path }}/yasm force=yes
 
 - name: reconfigure the yasm repo
-  shell: cd {{ ffmpeg_path }}/yasm && autoreconf -fiv # ./autogen.sh
-
-- name: configure yasm
-  shell: cd {{ ffmpeg_path }}/yasm && ./configure
+  command: ./autogen.sh --prefix=/usr/local \
+           chdir={{ ffmpeg_path }}/yasm
 
 - name: make yasm
-  shell: cd {{ ffmpeg_path }}/yasm && make
+  command: make \
+           chdir={{ ffmpeg_path }}/yasm
 
 - name: install yasm
   become: yes
-  shell: cd {{ ffmpeg_path }}/yasm && make install
+  command: make install \
+           chdir={{ ffmpeg_path }}/yasm
 
 - name: clean the yasm repo
   become: yes
-  shell: cd {{ ffmpeg_path }}/yasm && make distclean # ./autogen.sh
+  command: make distclean \
+           chdir={{ ffmpeg_path }}/yasm
