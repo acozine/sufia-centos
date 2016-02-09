@@ -27,3 +27,5 @@
   command: make install
   args:
     chdir: "{{ ffmpeg_path }}/lame-3.99.5"
+
+- include: ldconfig.yml

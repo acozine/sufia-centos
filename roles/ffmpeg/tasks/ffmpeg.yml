@@ -1,7 +1,5 @@
 ---
-- name: link media libraries built from source
-  become: yes
-  shell: /usr/sbin/ldconfig
+- include: ldconfig.yml
 
 - name: clone ffmpeg source
   git: repo=https://github.com/FFmpeg/FFmpeg.git \
@@ -27,6 +25,4 @@
   command: make distclean \
            chdir={{ ffmpeg_path }}/ffmpeg
 
-- name: link new ffmpeg
-  become: yes
-  shell: /usr/sbin/ldconfig
+- include: ldconfig.yml

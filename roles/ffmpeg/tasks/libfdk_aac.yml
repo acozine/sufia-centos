@@ -25,3 +25,5 @@
   become: yes
   command: make distclean \
            chdir={{ ffmpeg_path }}/fdk-aac
+
+- include: ldconfig.yml

@@ -28,4 +28,4 @@
 
 - name: ff add ldconfig for /usr/local/lib
   become: yes
-  copy: dest=/etc/ld.so.conf.d/usr-local.conf content=/usr/local/lib owner=root group=root mode=0644 
+  copy: dest=/etc/ld.so.conf.d/usr-local.conf content=/usr/local/lib owner=root group=root mode=0644

@@ -27,3 +27,5 @@
   command: make distclean
   args:
     chdir: "{{ ffmpeg_path }}/x264"
+
+- include: ldconfig.yml

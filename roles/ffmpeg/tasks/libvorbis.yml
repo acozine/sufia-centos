@@ -20,3 +20,5 @@
   become: yes
   command: make install \
            chdir={{ ffmpeg_path }}/libvorbis-1.3.3
+
+- include: ldconfig.yml

@@ -27,3 +27,5 @@
   become: yes
   command: make distclean \
            chdir={{ ffmpeg_path }}/yasm
+
+- include: ldconfig.yml

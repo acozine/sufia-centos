@@ -20,3 +20,5 @@
   become: yes
   command: make install \
            chdir={{ ffmpeg_path }}/opus-1.0.3
+
+- include: ldconfig.yml

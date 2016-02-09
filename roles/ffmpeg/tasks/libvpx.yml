@@ -21,3 +21,5 @@
   become: yes
   command: make distclean \
            chdir={{ ffmpeg_path }}/libvpx
+
+- include: ldconfig.yml
