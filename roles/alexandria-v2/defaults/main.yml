@@ -1,6 +1,6 @@
 ---
 # roles/alexandria-v2/defaults/main.yml
-project_name: alexandria-v2
+project_name: sufia-centos
 project_base: /opt
 
 deploy_user: deploy
