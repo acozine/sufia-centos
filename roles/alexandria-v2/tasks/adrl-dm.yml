@@ -14,5 +14,5 @@
   file: path={{ item }} owner={{ deploy_user }} group={{ deploy_group }} \
         state=directory recurse=yes
   with_items:
-    - "{{ project_base }}/download_root"
+    - "{{ etd_download_root }}"
     - "{{ project_base }}/ingest/metadata"
