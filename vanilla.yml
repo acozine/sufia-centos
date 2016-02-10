@@ -2,9 +2,9 @@
   hosts: vanilla-hosts
   remote_user: centos
   vars:
-      capistrano_user: # user name for cap deployments
-      capistrano_group: # group for cap deployments
-      capistrano_keys: # keys for any user who will cap deploy
+      deploy_user: # user name for cap deployments
+      deploy_group: # group for cap deployments
+      deploy_keys: # keys for any user who will cap deploy
           # see http://docs.ansible.com/ansible/authorized_key_module.html
       install_user: # unix user that performs installation
       install_group: # group for install_user

@@ -1,7 +1,7 @@
 ---
 install_path: /opt/install
-capistrano_user: deploy
-capistrano_group: deploy
+deploy_user: deploy
+deploy_group: deploy
 project_name: sufia-project
 rails_env: production
 pg_pass: postgres

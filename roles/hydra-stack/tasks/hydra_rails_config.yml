@@ -1,7 +1,8 @@
 ---
 - name: create shared fedora and solr configs
   become: yes
-  template: src={{ item }}.j2 dest=/opt/{{ project_name }}/shared/config/{{ item }} owner={{ capistrano_user }} group={{ capistrano_group }} backup=yes
+  template: src={{ item }}.j2 dest=/opt/{{ project_name }}/shared/config/{{ item }} \
+            owner={{ deploy_user }} group={{ deploy_group }} backup=yes
   with_items:
     - fedora.yml
     - solr.yml

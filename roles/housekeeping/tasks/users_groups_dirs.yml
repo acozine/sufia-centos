@@ -5,20 +5,20 @@
 - name: create install directory
   file: owner={{ ansible_ssh_user }} group={{ ansible_ssh_user }} state=directory path={{ install_path }}
 
-- name: create cap group
-  group: name={{ capistrano_group }} state=present
+- name: create deploy group
+  group: name={{ deploy_group }} state=present
 
-- name: create cap user
-  user: name={{ capistrano_user }} group={{ capistrano_group }} shell=/bin/bash createhome=yes state=present
+- name: create deploy user
+  user: name={{ deploy_user }} group={{ deploy_group }} shell=/bin/bash createhome=yes state=present
 
-- name: create cap directories
-  file: path={{ item }} state=directory owner={{ capistrano_user }} group={{ capistrano_group }} 
+- name: create deployment directories
+  file: path={{ item }} state=directory owner={{ deploy_user }} group={{ deploy_group }}
   with_items:
     - /opt/{{ project_name }}/shared/config/initializers
     - /opt/{{ project_name }}/shared/log
     - /opt/{{ project_name }}/releases
-    - /home/{{ capistrano_user }}/.ssh
+    - /home/{{ deploy_user }}/.ssh
 
-- name: add keys for capistrano user
-  authorized_key: user={{ capistrano_user }} key="{{ item }}" 
-  with_items: "{{ capistrano_keys }}"
+- name: add keys for deploy user
+  authorized_key: user={{ deploy_user }} key={{ item }}
+  with_items: "{{ deploy_keys }}"

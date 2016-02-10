@@ -2,6 +2,6 @@
 - name: install application config files
   become: yes
   template: src={{ item }}.j2 dest=/opt/{{ project_name }}/shared/config/{{ item }} \
-            group={{ capistrano_group }} owner={{ capistrano_user }} backup=no mode=0600
+            group={{ deploy_group }} owner={{ deploy_user }} backup=no mode=0600
   with_items:
     - application.yml

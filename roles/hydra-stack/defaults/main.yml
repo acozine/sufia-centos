@@ -1,8 +1,8 @@
 ---
 install_path: /opt/install
 base_path: prod
-capistrano_user: deploy
-capistrano_group: deploy
+deploy_user: deploy
+deploy_group: deploy
 
 fedora_ver: 4.5.0
 fedora_256: f9c778c4285dcbb7ab228f43e5e30ea7511a5553ca52a34e274e1e390cb5187e

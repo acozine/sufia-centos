@@ -1,8 +1,8 @@
 ---
 # roles/ldap/defaults/main.yml
 project_name: sufia-project
-capistrano_user: deploy
-capistrano_group: deploy
+deploy_user: deploy
+deploy_group: deploy
 # the attribute is the unique property by which to find users
 # in openldap this is usually uid
 # in ActiveDirectory it's often sAMAccountName

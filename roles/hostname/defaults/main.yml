@@ -1,6 +1,6 @@
 ---
 # roles/hostname/defaults/main.yml
 project_name: sufia-project
-capistrano_user: deploy
-capistrano_group: deploy
+deploy_user: deploy
+deploy_group: deploy
 server_name: 127.0.0.1

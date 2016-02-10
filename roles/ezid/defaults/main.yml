@@ -4,8 +4,8 @@
 # use them as "production" in environments
 # set to production where you do not want to write production ARKs
 project_name: sufia-project
-capistrano_user: deploy
-capistrano_group: deploy
+deploy_user: deploy
+deploy_group: deploy
 ezid_host: ezid.cdlib.org
 ezid_port: 443
 ezid_user: apitest
