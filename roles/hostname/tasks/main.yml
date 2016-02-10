@@ -2,10 +2,10 @@
 # roles/hostname/tasks/main.yml
 - name: add config/environments directory
   become: yes
-  file: path={{ project_base }}/{{ project_name }}/shared/config/environments \
+  file: path={{ config_path }}/environments \
         owner={{ deploy_user }} group={{ deploy_group }} state=directory
 
 - name: add environments config
   become: yes
-  template: src=production.rb.j2 dest={{ project_base }}/{{ project_name }}/shared/config/environments/production.rb \
+  template: src=production.rb.j2 dest={{ config_path }}/environments/production.rb \
             owner={{ deploy_user }} group={{ deploy_group }} backup=no

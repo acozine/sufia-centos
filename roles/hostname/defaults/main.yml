@@ -2,6 +2,8 @@
 # roles/hostname/defaults/main.yml
 project_name: sufia-project
 project_base: /opt
+config_path: "{{ project_base }}/{{ project_name }}/shared/config"
+
 deploy_user: deploy
 deploy_group: deploy
 server_name: 127.0.0.1

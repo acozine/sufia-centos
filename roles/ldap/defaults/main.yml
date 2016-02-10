@@ -2,6 +2,8 @@
 # roles/ldap/defaults/main.yml
 project_name: sufia-project
 project_base: /opt
+config_path: "{{ project_base }}/{{ project_name }}/shared/config"
+
 deploy_user: deploy
 deploy_group: deploy
 # the attribute is the unique property by which to find users

@@ -2,5 +2,5 @@
 # roles/ezid/tasks/main.yml
 - name: add ezid shared config
   become: yes
-  template: src=ezid.yml.j2 dest={{ project_base }}/{{ project_name }}/shared/config/ezid.yml \
+  template: src=ezid.yml.j2 dest={{ config_path }}/ezid.yml \
             owner={{ deploy_user }} group={{ deploy_group }} backup=no

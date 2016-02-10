@@ -2,8 +2,11 @@
 # roles/smtp/defaults/main.yml
 project_name: sufia-project
 project_base: /opt
+config_path: "{{ project_base }}/{{ project_name }}/shared/config"
+
 deploy_user: deploy
 deploy_group: deploy
+
 smtp_address: smtp.gmail.com,
-smtp_domain: gmail.com, 
+smtp_domain: gmail.com,
 smtp_port: 587,

@@ -14,7 +14,7 @@
 - name: create deployment directories
   file: path={{ item }} state=directory owner={{ deploy_user }} group={{ deploy_group }}
   with_items:
-    - "{{ project_base }}/{{ project_name }}/shared/config/initializers"
+    - "{{ config_path }}/initializers"
     - "{{ project_base }}/{{ project_name }}/shared/log"
     - "{{ project_base }}/{{ project_name }}/releases"
     - /home/{{ deploy_user }}/.ssh
