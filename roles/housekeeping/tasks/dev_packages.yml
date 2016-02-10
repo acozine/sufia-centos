@@ -25,26 +25,27 @@
     - rpm-build
     - rpm-sign
     # other packages
-    - java-1.8.0-openjdk
-    - screen
-    - wget
-    - curl-devel
-    - httpd-devel
-    - openssl-devel
-    - readline-devel
-    - sqlite-devel
-    - mysql-devel
     - ImageMagick-devel
-    - nasm
+    - curl-devel
+    - gdbm-devel
+    - git
+    - httpd-devel
+    - java-1.8.0-openjdk
+    - libffi-devel
     - libxml2-devel
     - libxslt-devel
     - libyaml-devel
-    - libffi-devel
-    # - java-1.7.0-openjdk-devel
-    - gdbm-devel
-    # - redis
-    - git
+    - mysql-devel
+    - nasm
+    - openssl-devel
+    - readline-devel
+    - screen
+    - sqlite-devel
+    - wget
     - xfsprogs
+    - xz
+    # - java-1.7.0-openjdk-devel
+    # - redis
     # on centos mod_xsendfile is not in the main repos
     # - mod_xsendfile
     - libreoffice-headless

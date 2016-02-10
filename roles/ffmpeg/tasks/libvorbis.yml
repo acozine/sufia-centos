@@ -1,24 +1,32 @@
 ---
 - name: download libvorbis source
-  get_url: url=http://downloads.xiph.org/releases/vorbis/libvorbis-1.3.3.tar.gz \
-           dest={{ ffmpeg_path }}/libvorbis-1.3.3.tar.gz
+  get_url:
+    url: http://downloads.xiph.org/releases/vorbis/libvorbis-{{ vorbis_ver }}.tar.xz
+    dest: "{{ ffmpeg_path }}/libvorbis-{{ vorbis_ver }}.tar.xz"
+    sha256sum: "{{ vorbis_256 }}"
 
 - name: unzip libvorbis source
-  unarchive: src={{ ffmpeg_path }}/libvorbis-1.3.3.tar.gz dest={{ ffmpeg_path }}/ \
-             creates={{ ffmpeg_path }}/libvorbis-1.3.3/compile.c copy=no
+  unarchive:
+    src: "{{ ffmpeg_path }}/libvorbis-{{ vorbis_ver }}.tar.xz"
+    dest: "{{ ffmpeg_path }}"
+    creates: "{{ ffmpeg_path }}/libvorbis-{{ vorbis_ver }}/compile.c"
+    copy: no
 
 - name: configure libvorbis
-  command: ./configure --prefix=/usr/local \
-           chdir={{ ffmpeg_path }}/libvorbis-1.3.3 \
-           creates={{ ffmpeg_path }}/libvorbis-1.3.3/Makefile
+  command: ./configure --prefix=/usr/local
+  args:
+    chdir: "{{ ffmpeg_path }}/libvorbis-{{ vorbis_ver }}"
+    creates: "{{ ffmpeg_path }}/libvorbis-{{ vorbis_ver }}/Makefile"
 
 - name: make libvorbis
-  command: make \
-           chdir={{ ffmpeg_path }}/libvorbis-1.3.3
+  command: make
+  args:
+    chdir: "{{ ffmpeg_path }}/libvorbis-{{ vorbis_ver }}"
 
 - name: install libvorbis
   become: yes
-  command: make install \
-           chdir={{ ffmpeg_path }}/libvorbis-1.3.3
+  command: make install
+  args:
+    chdir: "{{ ffmpeg_path }}/libvorbis-{{ vorbis_ver }}"
 
 - include: ldconfig.yml
