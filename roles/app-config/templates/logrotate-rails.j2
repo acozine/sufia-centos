@@ -1,8 +1,8 @@
-/opt/{{ project_name }}/shared/log/production.log {
+{{ project_base }}/{{ project_name }}/shared/log/production.log {
     copytruncate
     daily
     rotate 30
     compress
     missingok
-    create 0644 {{ capistrano_user }} {{ capistrano_group }}
+    create 0644 {{ deploy_user }} {{ deploy_group }}
 }

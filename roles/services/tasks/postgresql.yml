@@ -30,15 +30,15 @@
 
 - name: create pg_backups directory
   become: yes
-  file: owner=postgres group=postgres state=directory path=/opt/pg_backups
+  file: owner=postgres group=postgres state=directory path={{ project_base }}/pg_backups
 
 - name: add pg_backups script
   become: yes
-  template: src=pg_backups.j2 dest=/opt/pg_backups/pg_daily_double owner=root group=root mode=0755
+  template: src=pg_backups.j2 dest={{ project_base }}/pg_backups/pg_daily_double owner=root group=root mode=0755
 
 - name: add pg_backups cron job
   become: yes
-  cron: name="backup pg db" user=postgres job="/opt/pg_backups/pg_daily_double" minute="0" hour="1" state=present
+  cron: name="backup pg db" user=postgres job="{{ project_base }}/pg_backups/pg_daily_double" minute="0" hour="1" state=present
 
 - meta: flush_handlers
 

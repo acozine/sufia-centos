@@ -1,6 +1,6 @@
 ---
 # ROLE: deploy
-# roles/deploy/tasks/main.yml 
+# roles/deploy/tasks/main.yml
 #
 # Does a minimal install of a codebase in development mode to bootstrap a capistrano deployment
 #
@@ -18,7 +18,7 @@
 - name: add public key to deploy user
   become: yes
   authorized_key:
-      user: "{{ capistrano_user }}"
+      user: "{{ deploy_user }}"
       key: "{{ public_key.content | b64decode }}"
 
 - name: clone repo

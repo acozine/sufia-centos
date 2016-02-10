@@ -1,8 +1,10 @@
 ---
-capistrano_user: deploy
-capistrano_group: deploy
-capistrano_keys:
+deploy_user: deploy
+deploy_group: deploy
+deploy_keys:
     - https://github.com/acozine.keys
     - https://github.com/jcoyne.keys
-install_path: /opt/install
 project_name: sufia-project
+project_base: /opt
+install_path: "{{ project_base }}/install"
+config_path: "{{ project_base }}/{{ project_name }}/shared/config"

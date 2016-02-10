@@ -14,7 +14,7 @@
   template: src=auto.svm.j2 dest=/etc/auto.svm owner={{ ansible_ssh_user }} group={{ ansible_ssh_user }} mode=600
 
 - name: create mount point
-  file: path=/opt/ingest state=directory owner={{ ansible_ssh_user }} group={{ ansible_ssh_user }} mode=755
+  file: path={{ project_base }}/ingest state=directory owner={{ ansible_ssh_user }} group={{ ansible_ssh_user }} mode=755
 
 - name: restart automount
   service: name=autofs state=restarted enabled=yes

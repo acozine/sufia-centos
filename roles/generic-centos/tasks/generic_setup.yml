@@ -1,7 +1,7 @@
 ---
-- name: format volume for /opt
+- name: format volume for {{ project_base }}
   filesystem: fstype=xfs dev=/dev/sdc
 
-- name: mount volume at /opt
-  mount: name=/opt src=/dev/sdc fstype=xfs state=mounted
+- name: mount volume at {{ project_base }}
+  mount: name={{ project_base }} src=/dev/sdc fstype=xfs state=mounted
 

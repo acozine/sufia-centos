@@ -2,14 +2,15 @@
   hosts: vanilla-hosts
   remote_user: centos
   vars:
-      capistrano_user: # user name for cap deployments
-      capistrano_group: # group for cap deployments
-      capistrano_keys: # keys for any user who will cap deploy
+      deploy_user: # user name for cap deployments
+      deploy_group: # group for cap deployments
+      deploy_keys: # keys for any user who will cap deploy
           # see http://docs.ansible.com/ansible/authorized_key_module.html
+      project_base: #
+      project_name: #
       install_user: # unix user that performs installation
       install_group: # group for install_user
       become_user: # MUST HAVE THE SAME CONTENT AS install_user
-      project_name: #
       rails_env: #production|development|test|etc.
       server_name: # FQDN of target machine, e.g. sandbox.ucsb.edu
       pg_pass: # password for postgres admin user

@@ -6,7 +6,7 @@
            dest={{ install_path }}/fcrepo-webapp-{{ fedora_ver }}.war
 
 - name: make fedora data dir
-  file: owner=tomcat group=tomcat state=directory path=/opt/fedora-data
+  file: owner=tomcat group=tomcat state=directory path={{ project_base }}/fedora-data
   become: yes
 
 - name: check fedora.war

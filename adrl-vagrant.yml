@@ -2,15 +2,16 @@
   hosts: vagrant
   remote_user: vagrant
   vars:
-      capistrano_user: vagrant
-      capistrano_group: vagrant
+      deploy_user: vagrant
+      deploy_group: vagrant
       # Add keys to the list below for anyone who will cap deploy to the vm
       # see http://docs.ansible.com/ansible/authorized_key_module.html
-      capistrano_keys:
+      deploy_keys:
           - https://github.com/acozine.keys
           - https://github.com/mark-dce.keys
-      install_path: /opt/install
+      project_base: /opt
       project_name: alex2
+      install_path: "{{ project_base }}/install"
       rails_env: production
       server_name: vagrant.localhost
       solr_context: hydra

@@ -1,2 +1,3 @@
 ---
+project_base: /opt
 ec2_vol_1: "{{ hostvars['localhost'].ec2_vol }}"

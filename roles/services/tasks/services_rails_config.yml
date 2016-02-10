@@ -1,7 +1,8 @@
 ---
 - name: create shared config files
   become: yes
-  template: src={{ item }}.j2 dest=/opt/{{ project_name }}/shared/config/{{ item }} owner={{ capistrano_user }} group={{ capistrano_group }} backup=no
+  template: src={{ item }}.j2 dest={{ config_path }}/{{ item }} \
+            owner={{ deploy_user }} group={{ deploy_group }} backup=no
   with_items:
       - database.yml
       - redis.yml
