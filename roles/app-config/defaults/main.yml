@@ -1,6 +1,8 @@
 ---
 # roles/app-config/defaults/main.yml
 project_name: sufia-project
+project_base: /opt
+
 deploy_user: deploy
 deploy_group: deploy
 server_name: 127.0.0.1

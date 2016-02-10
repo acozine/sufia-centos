@@ -1,3 +1,4 @@
 ---
 # roles/riiif/defaults/main.yml
 project_name: sufia-project
+project_base: /opt

@@ -1,11 +1,12 @@
 ---
 project_name: alex2
+project_base: /opt
 
 tomcat: /usr/share/tomcat
 
 marmotta_ver: 3.3.0
 marmotta_256: 34c37281b6875ea95da391ae5bbe059f31091f3c6bf2529539241b35690c84b0
-marmotta_home: /opt/marmotta
+marmotta_home: "{{ project_base }}/marmotta"
 marmotta_group: marmotta
 marmotta_user: marmotta
 marmotta_db: marmotta

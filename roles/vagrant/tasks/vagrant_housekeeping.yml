@@ -1,15 +1,15 @@
 ---
 - name: temporarily move Guest Additions
   become: yes
-  shell: mv "/opt/VBoxGuestAdditions"* /tmp
+  shell: mv "{{ project_base }}/VBoxGuestAdditions"* /tmp
 
-- name: format volume for /opt
+- name: format volume for {{ project_base }}
   filesystem: fstype=xfs dev=/dev/sdc
 
-- name: mount volume at /opt
-  mount: name=/opt src=/dev/sdc fstype=xfs state=mounted
+- name: mount volume at {{ project_base }}
+  mount: name={{ project_base }} src=/dev/sdc fstype=xfs state=mounted
 
 - name: restore Guest Additions
   become: yes
-  shell: mv "/tmp/VBoxGuestAdditions"* /opt
+  shell: mv "/tmp/VBoxGuestAdditions"* {{ project_base }}
 

@@ -9,8 +9,9 @@
       deploy_keys:
           - https://github.com/acozine.keys
           - https://github.com/mark-dce.keys
-      install_path: /opt/install
+      project_base: /opt
       project_name: alex2
+      install_path: "{{ project_base }}/install"
       rails_env: production
       server_name: vagrant.localhost
       solr_context: hydra

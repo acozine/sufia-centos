@@ -1,6 +1,7 @@
 ---
 # roles/smtp/defaults/main.yml
 project_name: sufia-project
+project_base: /opt
 deploy_user: deploy
 deploy_group: deploy
 smtp_address: smtp.gmail.com,

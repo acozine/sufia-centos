@@ -1,7 +1,7 @@
 ---
 # roles/riiif/tasks/main.yml
 #
-# projects that use RIIIF cache images files at /opt/{{ project_name }}/current/tmp/network_files
+# projects that use RIIIF cache images files at {{ project_base }}/{{ project_name }}/current/tmp/network_files
 # left alone, over time, these files will eat all the space on the disk
 - name: add cron job to delete old network_files
   become: yes

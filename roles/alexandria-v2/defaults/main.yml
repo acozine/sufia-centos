@@ -1,7 +1,9 @@
 ---
 # roles/alexandria-v2/defaults/main.yml
 project_name: alexandria-v2
-minter_state_location: /opt/{{ project_name }}/shared/minter-state
-etd_download_root: /opt/download_root
+project_base: /opt
+
 deploy_user: deploy
 deploy_group: deploy
+minter_state_location: "{{ project_base }}/{{ project_name }}/shared/minter-state"
+etd_download_root: "{{ project_base }}/download_root"

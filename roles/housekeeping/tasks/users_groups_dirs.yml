@@ -1,6 +1,6 @@
 ---
-- name: chown /opt
-  file: owner={{ ansible_ssh_user }} group={{ ansible_ssh_user }} state=directory path=/opt
+- name: chown {{ project_base }}
+  file: owner={{ ansible_ssh_user }} group={{ ansible_ssh_user }} state=directory path={{ project_base }}
 
 - name: create install directory
   file: owner={{ ansible_ssh_user }} group={{ ansible_ssh_user }} state=directory path={{ install_path }}
@@ -14,9 +14,9 @@
 - name: create deployment directories
   file: path={{ item }} state=directory owner={{ deploy_user }} group={{ deploy_group }}
   with_items:
-    - /opt/{{ project_name }}/shared/config/initializers
-    - /opt/{{ project_name }}/shared/log
-    - /opt/{{ project_name }}/releases
+    - "{{ project_base }}/{{ project_name }}/shared/config/initializers"
+    - "{{ project_base }}/{{ project_name }}/shared/log"
+    - "{{ project_base }}/{{ project_name }}/releases"
     - /home/{{ deploy_user }}/.ssh
 
 - name: add keys for deploy user
