@@ -1,0 +1,7 @@
+---
+file_server: "://example.server.org/"
+project_base: /opt
+mount_point: "{{ project_base }}/ingest"
+mount_opts: -fstype=cifs,ro,sec=ntlm,noexec,_netdev
+automount_user:
+automount_pass:
