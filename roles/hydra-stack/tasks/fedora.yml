@@ -18,6 +18,15 @@
   command: cp {{ install_path }}/fcrepo-webapp-{{ fedora_ver }}.war {{ tomcat }}/webapps/fedora.war
   when: fedora_war.stat.exists == False
 
+- name: write fedora password to secrets.yml
+  become: yes
+  lineinfile:
+      backup: yes
+      dest: "{{ config_path }}/secrets.yml"
+      state: present
+      insertafter: ^default
+      line: "  fedora_pass: {{ fedora_pass }}"
+
 - name: create tomcat config and java options
   become: yes
   template: src=tomcat.j2 dest=/etc/tomcat/tomcat.conf backup=yes
