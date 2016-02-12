@@ -9,9 +9,9 @@
       insertafter: ^default
       line: "{{ item }}"
   with_items:
-      - "ezid_default_shoulder: {{ ezid_default_shoulder }}"
-      - "ezid_pass: {{ ezid_password }}"
-      - "ezid_user: {{ ezid_user }}"
+      - "  ezid_default_shoulder: {{ ezid_default_shoulder }}"
+      - "  ezid_pass: {{ ezid_password }}"
+      - "  ezid_user: {{ ezid_user }}"
 
 - name: add ezid shared config
   become: yes

@@ -9,8 +9,8 @@
       insertafter: ^default
       line: "{{ item }}"
   with_items:
-      - "ldap_pass: {{ ldap_admin_password }}"
-      - "ldap_user: {{ ldap_admin_user }}"
+      - "  ldap_pass: {{ ldap_admin_password }}"
+      - "  ldap_user: {{ ldap_admin_user }}"
 
 - name: add shared ldap config
   become: yes
