@@ -5,12 +5,12 @@ default: &default
   user:             <%= Rails.application.secrets.ezid_user %>
   password:         <%= Rails.application.secrets.ezid_pass %>
   default_shoulder: <%= Rails.application.secrets.ezid_default_shoulder %>
-+
-+development:
-+  <<: *default
-+
-+test:
-+  <<: *default
-+
-+production:
-+  <<: *default
+
+development:
+  <<: *default
+
+test:
+  <<: *default
+
+production:
+  <<: *default
