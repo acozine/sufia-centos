@@ -1,6 +1,22 @@
 ---
 # roles/ldap/tasks/main.yml
+- name: write ldap user to secrets.yml
+  become: yes
+  lineinfile:
+      backup: yes
+      dest: "{{ config_path }}/secrets.yml"
+      state: present
+      insertafter: ^default
+      line: "{{ item }}"
+  with_items:
+      - "ldap_pass: {{ ldap_admin_password }}"
+      - "ldap_user: {{ ldap_admin_user }}"
+
 - name: add shared ldap config
   become: yes
-  template: src=ldap.yml.j2 dest={{ config_path }}/ldap.yml \
-            owner={{ deploy_user }} group={{ deploy_group }} backup=no
+  template:
+      src: ldap.yml.j2
+      dest: "{{ config_path }}/ldap.yml"
+      owner: "{{ deploy_user }}"
+      group: "{{ deploy_group }}"
+      backup: no

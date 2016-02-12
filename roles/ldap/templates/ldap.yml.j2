@@ -5,9 +5,10 @@ default: &default
   group_base: {{ ldap_group_base }}
 
 production:
+  <<: *default
   host: {{ ldap_host }}
   port: {{ ldap_port }}
-  admin_user: {{ ldap_admin_user }}
-  admin_password: {{ ldap_admin_password }}
+  admin_user: <%= Rails.application.secrets.ldap_user %>
+  admin_password: <%= Rails.application.secrets.ldap_pass %>
   ssl: {{ ldap_ssl }}
   <<: *default
