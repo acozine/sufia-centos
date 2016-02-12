@@ -14,11 +14,11 @@
 
 - name: write mount configuration
   become: yes
-  template: src=auto.svm.j2 dest=/etc/auto.svm owner={{ ansible_ssh_user }} group={{ ansible_ssh_user }} mode=600
+  template: src=auto.hydra.j2 dest=/etc/auto.hydra owner={{ ansible_ssh_user }} group={{ ansible_ssh_user }} mode=600
 
 - name: create mount point
   become: yes
-  file: path={{ project_base }}/ingest state=directory owner={{ ansible_ssh_user }} group={{ ansible_ssh_user }} mode=755
+  file: path={{ mount_point }} state=directory owner={{ ansible_ssh_user }} group={{ ansible_ssh_user }} mode=755
 
 - name: restart automount
   become: yes
