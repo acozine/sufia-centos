@@ -1,9 +1,16 @@
 # This config file was created by Ansible
-# development:
-# test:
-production:
+default: &default
   host:             {{ ezid_host }}
   port:             {{ ezid_port }}
-  user:             {{ ezid_user }}
-  password:         {{ ezid_password }}
-  default_shoulder: {{ ezid_default_shoulder }}
+  user:             <%= Rails.application.secrets.ezid_user %>
+  password:         <%= Rails.application.secrets.ezid_pass %>
+  default_shoulder: <%= Rails.application.secrets.ezid_default_shoulder %>
++
++development:
++  <<: *default
++
++test:
++  <<: *default
++
++production:
++  <<: *default

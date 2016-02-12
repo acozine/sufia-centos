@@ -1,6 +1,23 @@
 ---
 # roles/ezid/tasks/main.yml
+- name: write ezid secrets to secrets.yml
+  become: yes
+  lineinfile:
+      backup: yes
+      dest: "{{ config_path }}/secrets.yml"
+      state: present
+      insertafter: ^default
+      line: "{{ item }}"
+  with_items:
+      - "ezid_default_shoulder: {{ ezid_default_shoulder }}"
+      - "ezid_pass: {{ ezid_password }}"
+      - "ezid_user: {{ ezid_user }}"
+
 - name: add ezid shared config
   become: yes
-  template: src=ezid.yml.j2 dest={{ config_path }}/ezid.yml \
-            owner={{ deploy_user }} group={{ deploy_group }} backup=no
+  template:
+      src: ezid.yml.j2
+      dest: "{{ config_path }}/ezid.yml"
+      owner: "{{ deploy_user }}"
+      group: "{{ deploy_group }}"
+      backup: no
