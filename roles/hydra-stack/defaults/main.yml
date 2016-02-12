@@ -1,10 +1,10 @@
 ---
 project_base: /opt
 install_path: "{{ project_base }}/install"
-base_path: prod
 deploy_user: deploy
 deploy_group: deploy
 
+fedora_base_path: prod
 fedora_pass: fedoraAdmin
 fedora_ver: 4.5.0
 fedora_256: f9c778c4285dcbb7ab228f43e5e30ea7511a5553ca52a34e274e1e390cb5187e
