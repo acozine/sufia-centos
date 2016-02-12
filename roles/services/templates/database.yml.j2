@@ -3,6 +3,6 @@ production:
   encoding: unicode
   database: {{ hydra_db }}
   pool: 5
-  username: {{ hydra_pg_user }}
-  password: {{ hydra_pg_pass }}
+  username: <%= Rails.application.secrets.hydra_postgres_user %>
+  password: <%= Rails.application.secrets.hydra_postgres_pass %>
 
