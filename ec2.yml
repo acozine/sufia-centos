@@ -14,8 +14,8 @@
     - { role: ec2, sudo: yes }
     - { role: housekeeping, sudo: yes }
     - { role: ruby }
-    - { role: hydra-stack }
     - { role: services }
+    - { role: hydra-stack }
     - { role: passenger, sudo: yes }
     - { role: marmotta }
     - { role: app-config, sudo: yes }

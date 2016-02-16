@@ -3,6 +3,7 @@
 # the default values are development credentials
 # use them as "production" in environments
 # set to production where you do not want to write production ARKs
+project_base: /opt
 project_name: sufia-project
 deploy_user: deploy
 deploy_group: deploy
@@ -10,3 +11,4 @@ ezid_host: ezid.cdlib.org
 ezid_port: 443
 ezid_user: apitest
 ezid_default_shoulder: ark:/99999/fk4
+config_path: "{{ project_base }}/{{ project_name }}/shared/config"
