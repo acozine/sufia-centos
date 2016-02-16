@@ -1,8 +1,8 @@
 ---
 ffmpeg_path: "{{ install_path }}/ffmpeg_sources"
 
-ffmpeg_ver: 2.8.6
-ffmpeg_256: 40611e329bc354592c6f8f1deb033c31b91f80e91f5707ca4f9afceca78d8e62
+ffmpeg_ver: 3.0
+ffmpeg_256: f19ff77a2f7f736a41dd1499eef4784bf3cb7461f07c13a268164823590113c0
 
 fdk_ver: 0.1.4
 fdk_256: 5910fe788677ca13532e3f47b7afaa01d72334d46a2d5e1d1f080f1173ff15ab
