@@ -1,0 +1,5 @@
+---
+- name: install base application.yml
+  template:
+    src: application.yml.j2
+    dest: "{{ config_path }}/application.yml"
