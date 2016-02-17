@@ -13,11 +13,14 @@
       - "  ezid_pass: {{ ezid_password }}"
       - "  ezid_user: {{ ezid_user }}"
 
-- name: add ezid shared config
+- name: write ezid hostname/port to application.yml
   become: yes
-  template:
-      src: ezid.yml.j2
-      dest: "{{ config_path }}/ezid.yml"
-      owner: "{{ deploy_user }}"
-      group: "{{ deploy_group }}"
-      backup: no
+  lineinfile:
+      backup: yes
+      dest: "{{ config_path }}/application.yml"
+      state: present
+      insertafter: ^default
+      line: "{{ item }}"
+  with_items:
+      - "  ezid_host: {{ ezid_host }}"
+      - "  ezid_port: {{ ezid_port }}"
