@@ -24,6 +24,7 @@
 - name: clone repo
   git:
       repo: "{{ repo }}"
+      recursive: no
       dest: /home/{{ ansible_ssh_user }}/{{ project_name }}
 
 - name: setup repo - i.e. bundle install
