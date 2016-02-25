@@ -8,7 +8,17 @@
 #     - { role: imagemagick, imagemagick_ver: '6.6' }   # will install the highest version matching the 6.6 prefix
 
 - include: im_libraries.yml
+
+- name: check if built imagemagick is installed
+  become: yes
+  stat: path=/usr/local/bin/convert
+  register: imagemagick
+
 - include: openjpg.yml
+  when: imagemagick.stat.exists == False
 - include: libtiff.yml
+  when: imagemagick.stat.exists == False
 - include: libpng.yml
+  when: imagemagick.stat.exists == False
 - include: imagemagick.yml
+  when: imagemagick.stat.exists == False
