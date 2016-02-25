@@ -1,13 +1,26 @@
 ---
-# can I add a check here that if ffmpeg is already configured and installed
-# I skip the whole rest of the role?
 - include: ff_libraries.yml
+  
+- name: check if built ffmpeg is installed
+  become: yes
+  stat: path=/usr/local/bin/ffmpeg
+  register: ffmpeg
+
 - include: yasm.yml
+  when: ffmpeg.stat.exists == False
 - include: x264.yml
+  when: ffmpeg.stat.exists == False
 - include: libfdk_aac.yml
+  when: ffmpeg.stat.exists == False
 - include: libmp3lame.yml
+  when: ffmpeg.stat.exists == False
 - include: libopus.yml
+  when: ffmpeg.stat.exists == False
 - include: libogg.yml
+  when: ffmpeg.stat.exists == False
 - include: libvorbis.yml
+  when: ffmpeg.stat.exists == False
 - include: libvpx.yml
+  when: ffmpeg.stat.exists == False
 - include: ffmpeg.yml
+  when: ffmpeg.stat.exists == False
