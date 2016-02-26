@@ -1,17 +1,17 @@
-defaults: &default
+defaults: &defaults
   address: {{ smtp_address }}
   domain: {{ smtp_domain }}
   port: {{ smtp_port }}
-  authentication: plain,
+  authentication: plain
   enable_starttls_auto: true
   user_name: <%= Rails.application.secrets.smtp_user %>
-  password: <%= Rails.application.secrets.smtp_password %>
+  password: <%= Rails.application.secrets.smtp_pass %>
 
 development:
-  <<: *default
+  <<: *defaults
 
 test:
-  <<: *default
+  <<: *defaults
 
 production:
-  <<: *default
+  <<: *defaults

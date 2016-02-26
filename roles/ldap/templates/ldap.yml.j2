@@ -1,14 +1,13 @@
 ## Environment
-default: &default
+defaults: &defaults
   attribute: {{ ldap_attribute }}
   base: {{ ldap_base }}
   group_base: {{ ldap_group_base }}
 
 production:
-  <<: *default
+  <<: *defaults
   host: {{ ldap_host }}
   port: {{ ldap_port }}
   admin_user: <%= Rails.application.secrets.ldap_user %>
   admin_password: <%= Rails.application.secrets.ldap_pass %>
   ssl: {{ ldap_ssl }}
-  <<: *default
