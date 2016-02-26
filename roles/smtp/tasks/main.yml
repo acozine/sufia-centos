@@ -1,5 +1,17 @@
 ---
 # roles/smtp/tasks/main.yml
+- name: write smtp user to secrets.yml
+  become: yes
+  lineinfile:
+      backup: yes
+      dest: "{{ config_path }}/secrets.yml"
+      state: present
+      insertafter: ^default
+      line: "{{ item }}"
+  with_items:
+      - "  smtp_pass: {{ smtp_pass }}"
+      - "  smtp_user: {{ smtp_user }}"
+
 - name: add smtp shared config file
   become: yes
   template: src=smtp.yml.j2 dest={{ config_path }}/smtp.yml \
