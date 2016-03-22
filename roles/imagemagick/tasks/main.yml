@@ -1,14 +1,30 @@
 ---
 # ROLE: imagemagick
-# roles/imagemagick/tasks/main.yml 
+# roles/imagemagick/tasks/main.yml
 #
 # USAGE:
-# Installs the most recent release of ImageMagick, if you need a specific major or minor release, set the `imagemagick_ver:` variable
-#   EG:
-#     - { role: imagemagick, imagemagick_ver: '6.6' }   # will install the highest version matching the 6.6 prefix
+# Installs the most recent release of ImageMagick, if you need a
+# specific major or minor release, set the `imagemagick_ver:` variable
 
 - include: im_libraries.yml
-- include: openjpg.yml
+
+- stat: path=/usr/local/lib/libtiff.a
+  register: tiff_stat
 - include: libtiff.yml
+  when: tiff_stat.stat.exists == False
+
+- stat: path=/usr/local/lib/libpng{{ libpng_major }}.a
+  register: png_stat
 - include: libpng.yml
+  when: png_stat.stat.exists == False
+
+- stat: path=/usr/local/lib/libopenjp2.so.{{ openjpg_ver }}
+  register: jpg_stat
+- include: openjpg.yml
+  when: jpg_stat.stat.exists == False
+
+- stat: path=/usr/local/lib/libMagick++-6.Q16.a
+  register: magick_stat
+  ignore_errors: True
 - include: imagemagick.yml
+  when: magick_stat.stat.exists == False

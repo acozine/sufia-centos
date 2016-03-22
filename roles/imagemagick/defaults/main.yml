@@ -3,7 +3,16 @@
 project_base: /opt
 install_path: "{{ project_base }}/install"
 magick_path: "{{ install_path }}/imagemagick_sources" # needs double-quotes for yaml syntax
+
 openjpg_ver: '2.1.0'
-libtiff_ver: '4.0.5'
-libpng_ver: '1.6.20'
-imagemagick_ver: '.' # call the role with imagemagick_ver: '6.8' to get the most recent 6.8 release, '.' to match the newest release
+openjpg_256: 1232bb814fd88d8ed314c94f0bfebb03de8559583a33abbe8c64ef3fc0a8ff03
+
+libtiff_ver: '4.0.6'
+libtiff_256: 4d57a50907b510e3049a4bba0d7888930fdfc16ce49f1bf693e5b6247370d68c
+
+libpng_ver: '1.6.21'
+libpng_major: 16
+libpng_256: 6c8f1849eb9264219bf5d703601e5abe92a58651ecae927a03d1a1aa15ee2083
+
+imagemagick_ver: '6.9.3-6'
+imagemagick_256: 519b14a5f58f5b55a61bebd378aff63176d8c2e9d1eb23ee332d2cc73d11943f

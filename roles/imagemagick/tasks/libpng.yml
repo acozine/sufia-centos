@@ -1,16 +1,31 @@
 ---
 - name: download libpng source
-  get_url: url=http://sourceforge.net/projects/libpng/files/libpng16/{{ libpng_ver }}/libpng-{{ libpng_ver }}.tar.gz dest={{ magick_path }}/libpng-{{ libpng_ver }}.tar.gz
+  get_url:
+    url: https://downloads.sourceforge.net/project/libpng/libpng{{ libpng_major }}/{{ libpng_ver }}/libpng-{{ libpng_ver }}.tar.xz
+    dest: "{{ magick_path }}/libpng-{{ libpng_ver }}.tar.xz"
+    sha256sum: "{{ libpng_256 }}"
 
 - name: unzip libpng source
-  unarchive: src={{ magick_path }}/libpng-{{ libpng_ver }}.tar.gz dest={{ magick_path }}/ creates={{ magick_path }}/libpng-{{ libpng_ver }} copy=no
+  unarchive:
+    src: "{{ magick_path }}/libpng-{{ libpng_ver }}.tar.xz"
+    dest: "{{ magick_path }}/"
+    creates: "{{ magick_path }}/libpng-{{ libpng_ver }}"
+    copy: no
 
 - name: configure libpng
-  shell: cd {{ magick_path }}/libpng-{{ libpng_ver }} && ./configure
+  command: ./configure
+  args:
+    chdir: "{{ magick_path }}/libpng-{{ libpng_ver }}"
 
 - name: make libpng
-  shell: cd {{ magick_path }}/libpng-{{ libpng_ver }} && make 
+  command: make
+  args:
+    chdir: "{{ magick_path }}/libpng-{{ libpng_ver }}"
 
 - name: install libpng
   become: yes
-  shell: cd {{ magick_path }}/libpng-{{ libpng_ver }} && make install
+  command: make install
+  args:
+    chdir: "{{ magick_path }}/libpng-{{ libpng_ver }}"
+
+- include: ldconfig.yml

@@ -1,36 +1,35 @@
 ---
 # Note: this code assumes that valid imagemagick releases are in tar-zip format.  It appears that future releases may switch to 7zip format...
 
-- name: find latest matching release {{ imagemagick_ver | default('') }} number
-  # get the list of release downloads
-  # filter for matching versions: '' = everything, '6' = any 6.x version, '6.8' = any 6.8.y version,
-  #     '6.8.1-9' = exact match (use exact with caution since they become obsolete quickly)
-  # take the most recent
-  shell: curl http://www.imagemagick.org/download/releases/ | grep -o -P '[0-9]+[.][0-9]+[.][0-9]+-[0-9]+(?=\.tar)' | grep {{ imagemagick_ver }} | sort -V | tail -n 1
-  register: im_release  # .content contains a string like 6.8.3-10
+# ImageMagick regularly removes old tarballs, so use a mirror
+- name: download ImageMagick
+  get_url:
+    url: https://dl.bintray.com/homebrew/mirror/ImageMagick-6.9.3-6.tar.xz
+    dest: "{{ magick_path }}/ImageMagick-{{ imagemagick_ver }}.tar.xz"
+    sha256sum: "{{ imagemagick_256 }}"
 
-- name: set archive filename
-  set_fact: im_zip=ImageMagick-{{ im_release.stdout }}.tar.xz
-
-- name: set target directory
-  set_fact: im_dir="{{ magick_path }}/ImageMagick-{{ im_release.stdout }}"
-
-- name: download release
-  get_url: url=http://www.imagemagick.org/download/releases/{{ im_zip }} dest={{ magick_path }}/{{ im_zip }}
-
-- name: unzip tarball
-  unarchive: src={{ magick_path }}/{{ im_zip }} dest={{ magick_path }} copy=no
+- name: unpack ImageMagick
+  unarchive:
+    src: "{{ magick_path }}/ImageMagick-{{ imagemagick_ver }}.tar.xz"
+    dest: "{{ magick_path }}/"
+    copy: no
 
 - name: configure ImageMagick
-  shell: cd {{ im_dir }} && PKG_CONFIG_PATH=/usr/local/lib/pkgconfig ./configure --prefix=/usr/local --with-modules=yes
+  environment:
+    PKG_CONFIG_PATH: /usr/local/lib/pkgconfig
+  command: ./configure --prefix=/usr/local --with-modules=yes
+  args:
+    chdir: "{{ magick_path }}/ImageMagick-{{ imagemagick_ver }}"
 
 - name: make ImageMagick
-  shell: cd {{ im_dir }} && make
+  command: make
+  args:
+    chdir: "{{ magick_path }}/ImageMagick-{{ imagemagick_ver }}"
 
 - name: install ImageMagick
   become: yes
-  shell: cd {{ im_dir }} && make install
+  command: make install
+  args:
+    chdir: "{{ magick_path }}/ImageMagick-{{ imagemagick_ver }}"
 
-- name: link new ImageMagick
-  become: yes
-  command: /usr/sbin/ldconfig
+- include: ldconfig.yml
