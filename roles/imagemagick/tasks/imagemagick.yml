@@ -4,7 +4,7 @@
 # ImageMagick regularly removes old tarballs, so use a mirror
 - name: download ImageMagick
   get_url:
-    url: https://dl.bintray.com/homebrew/mirror/ImageMagick-6.9.3-6.tar.xz
+    url: https://dl.bintray.com/homebrew/mirror/ImageMagick-{{ imagemagick_ver }}.tar.xz
     dest: "{{ magick_path }}/ImageMagick-{{ imagemagick_ver }}.tar.xz"
     sha256sum: "{{ imagemagick_256 }}"
 
