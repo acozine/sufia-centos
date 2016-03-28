@@ -8,6 +8,7 @@ openjpg_ver: '2.1.0'
 openjpg_256: 1232bb814fd88d8ed314c94f0bfebb03de8559583a33abbe8c64ef3fc0a8ff03
 
 libtiff_ver: '4.0.6'
+libtiff_lib_ver: 5.2.4
 libtiff_256: 4d57a50907b510e3049a4bba0d7888930fdfc16ce49f1bf693e5b6247370d68c
 
 libpng_ver: '1.6.21'

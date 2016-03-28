@@ -8,7 +8,7 @@
 
 - include: im_libraries.yml
 
-- stat: path=/usr/local/lib/libtiff.a
+- stat: path=/usr/local/lib/libtiff.so.{{ libtiff_lib_ver }}
   register: tiff_stat
 - include: libtiff.yml
   when: tiff_stat.stat.exists == False
