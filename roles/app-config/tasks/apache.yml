@@ -1,15 +1,13 @@
 ---
+- name: add mod_xsendfile
+  yum: name=mod_xsendfile state=present
+
 - name: create apache vhosts file
   template: src=apache_config.j2 dest=/etc/httpd/conf.d/{{ project_name }}.conf owner=root group=root backup=no
 
 - name: remove default apache site
   file: path=/etc/httpd/conf.d/welcome.conf state=absent
 
-- name: add mod_xsendfile
-  yum: name=mod_xsendfile state=present
-
 - name: set apache to restart on reboot
   become: yes
   service: name=httpd enabled=yes
-
-
