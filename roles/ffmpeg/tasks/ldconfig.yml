@@ -1,0 +1,4 @@
+---
+- name: link libraries
+  become: yes
+  shell: /usr/sbin/ldconfig

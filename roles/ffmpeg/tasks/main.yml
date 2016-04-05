@@ -1,13 +1,47 @@
 ---
-# can I add a check here that if ffmpeg is already configured and installed
-# I skip the whole rest of the role?
 - include: ff_libraries.yml
+
+- stat: path=/usr/local/bin/yasm
+  register: yasm_stat
 - include: yasm.yml
+  when: yasm_stat.stat.xusr is not defined or yasm_stat.stat.xusr == False
+
+- stat: path=/usr/local/bin/x264
+  register: x264_stat
 - include: x264.yml
+  when: x264_stat.stat.xusr is not defined or x264_stat.stat.xusr == False
+
+- stat: path=/usr/local/lib/libfdk-aac.a
+  register: aac_stat
 - include: libfdk_aac.yml
+  when: aac_stat.stat.exists == False
+
+- stat: path=/usr/local/bin/lame
+  register: lame_stat
 - include: libmp3lame.yml
+  when: lame_stat.stat.xusr is not defined or lame_stat.stat.xusr == False
+
+- stat: path=/usr/local/lib/libopus.a
+  register: opus_stat
 - include: libopus.yml
+  when: opus_stat.stat.exists == False
+
+- stat: path=/usr/local/lib/libogg.a
+  register: ogg_stat
 - include: libogg.yml
+  when: ogg_stat.stat.exists == False
+
+- stat: path=/usr/local/lib/libvorbis.a
+  register: vorbis_stat
 - include: libvorbis.yml
+  when: vorbis_stat.stat.exists == False
+
+- stat: path=/usr/local/lib/libvpx.a
+  register: vpx_stat
 - include: libvpx.yml
+  when: vpx_stat.stat.exists == False
+
+- stat: path=/usr/local/bin/ffmpeg
+  register: ffmpeg_stat
 - include: ffmpeg.yml
+  when: ffmpeg_stat.stat.xusr is not defined or ffmpeg_stat.stat.xusr == False

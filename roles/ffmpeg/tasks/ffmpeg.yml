@@ -1,25 +1,40 @@
 ---
-- name: link media libraries built from source
-  become: yes
-  shell: /usr/sbin/ldconfig
+- include: ldconfig.yml
 
-- name: clone ffmpeg source
-  git: repo=git://source.ffmpeg.org/ffmpeg depth=1 accept_hostkey=yes dest={{ ffmpeg_path }}/ffmpeg force=yes
+- name: download ffmpeg
+  get_url:
+    url: https://ffmpeg.org/releases/ffmpeg-{{ ffmpeg_ver }}.tar.bz2
+    dest: "{{ install_path }}/ffmpeg-{{ ffmpeg_ver }}.tar.bz2"
+    sha256sum: "{{ ffmpeg_256 }}"
+
+- name: unpack ffmpeg
+  unarchive:
+    copy: no
+    src: "{{ install_path }}/ffmpeg-{{ ffmpeg_ver }}.tar.bz2"
+    dest: "{{ ffmpeg_path }}"
 
 - name: configure ffmpeg
-  shell: cd {{ ffmpeg_path }}/ffmpeg && PKG_CONFIG_PATH=/usr/local/lib/pkgconfig ./configure --extra-libs="-ldl" --enable-gpl --enable-nonfree --enable-libfdk_aac --enable-libmp3lame --enable-libopus --enable-libvorbis --enable-libvpx --enable-libx264
+  environment:
+    PKG_CONFIG_PATH: /usr/local/lib/pkgconfig
+  shell: ./configure --extra-libs="-ldl" --enable-gpl --enable-nonfree --enable-libfdk_aac --enable-libmp3lame --enable-libopus --enable-libvorbis --enable-libvpx --enable-libx264
+  args:
+    chdir: "{{ ffmpeg_path }}/ffmpeg-{{ ffmpeg_ver }}"
 
 - name: make ffmpeg
-  shell: cd {{ ffmpeg_path }}/ffmpeg && make 
+  command: make
+  args:
+    chdir: "{{ ffmpeg_path }}/ffmpeg-{{ ffmpeg_ver }}"
 
 - name: install ffmpeg
   become: yes
-  shell: cd {{ ffmpeg_path }}/ffmpeg && make install
+  command: make install
+  args:
+    chdir: "{{ ffmpeg_path }}/ffmpeg-{{ ffmpeg_ver }}"
 
-- name: clean the ffmpeg repo
+- name: clean the ffmpeg source tree
   become: yes
-  shell: cd {{ ffmpeg_path }}/ffmpeg && make distclean
+  command: make distclean
+  args:
+    chdir: "{{ ffmpeg_path }}/ffmpeg-{{ ffmpeg_ver }}"
 
-- name: link new ffmpeg
-  become: yes
-  shell: /usr/sbin/ldconfig
+- include: ldconfig.yml
